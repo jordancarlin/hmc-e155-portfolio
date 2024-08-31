@@ -12,4 +12,4 @@ about:
         href: https://github.com/jordancarlin
 ---
 
-Insert bio here
+Jordan Carlin is a junior engineering major at Harvey Mudd College interested in computer engineering and digital design. He is currently doing research as a Clay-Wolkin Fellow at Harvey Mudd's VLSI lab working on a superscalar implementation of the open-source [OpenHW-Group CVW RISC-V SoC](https://github.com/openhwgroup/cvw). He has experience with SystemVerilog and RISC-V assembly and would love to continue growing his computer engineering skills. He's always excited to learn new things and would be happy to connect with you!
