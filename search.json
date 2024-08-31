@@ -1,10 +1,10 @@
 [
   {
-    "objectID": "posts/first-post.html",
-    "href": "posts/first-post.html",
-    "title": "Hello Quarto",
+    "objectID": "posts/learning-goals.html",
+    "href": "posts/learning-goals.html",
+    "title": "Initial Learning Goals",
     "section": "",
-    "text": "Placeholder"
+    "text": "I’m very excited to begin my journey into the world of microprocessors and embedded systems in this class. While I have some experience with FPGAs from my internship with Masimo this past summer, they’re still relatively new to me and I’m looking forward to learning more about the ins and outs of how to use them. I’m also interested in learning more about when to use an FPGA vs MCU and how to program an ARM MCU (most of my experience so far is with RISC-V)."
   },
   {
     "objectID": "resources.html",
@@ -18,7 +18,7 @@
     "href": "blog.html",
     "title": "E155 Blog",
     "section": "",
-    "text": "Hello Quarto\n\n\n\n\n\nWelcome to my Quarto portfolio\n\n\n\n\n\nAug 26, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\nNo matching items"
+    "text": "Initial Learning Goals\n\n\n\n\n\nWhat I want to get out of MicroPs\n\n\n\n\n\nAug 30, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
