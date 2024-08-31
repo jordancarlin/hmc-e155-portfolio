@@ -1,0 +1,11 @@
+---
+title: "Initial Learning Goals"
+description: "What I want to get out of MicroPs"
+author: "Jordan Carlin"
+date: "8/30/24"
+categories:
+  - reflection
+draft: false
+---
+
+I'm very excited to begin my journey into the world of microprocessors and embedded systems in this class. While I have some experience with FPGAs from my internship with Masimo this past summer, they're still relatively new to me and I'm looking forward to learning more about the ins and outs of how to use them. I'm also interested in learning more about when to use an FPGA vs MCU and how to program an ARM MCU (most of my experience so far is with RISC-V).
