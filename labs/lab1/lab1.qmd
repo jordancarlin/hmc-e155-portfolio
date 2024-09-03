@@ -31,13 +31,39 @@ The following block diagram shows how these modules fit together and the inputs/
 
 ![](images/block_diagram.png)
 
+The FPGA-specific module can be found [here](https://github.com/jordancarlin/e155-lab1/blob/main/fpga/radiant_project/e155_lab1/source/lab1_jc.sv) and all of the other SystemVerilog modules are [here](https://github.com/jordancarlin/e155-lab1/tree/main/fpga/src).
+
 ### Testing
-I ran into lots of issues with QuestaSim on my personal computer (tried both Linux and Windows)
+I ran into lots of issues with QuestaSim on my personal computer (tried both Linux and Windows), but was eventually able to get it running by manually recompiling the files from within the Questa GUI. I'll probably switch to using the `vsim` cli going forwards to avoid issues and automate this process.
 
+Once I had Questa working, I created a testbench to verify my Verilog was working correctly. Since all of the modules are very simple in this case, I went with a single top-level testbench that runs on the `top` module (excluding the FPGA specific components). This [testbench] (https://github.com/jordancarlin/e155-lab1/blob/main/fpga/testbench/lab1_tb.sv) loads a series of [testvectors](https://github.com/jordancarlin/e155-lab1/blob/main/fpga/testbench/lab1_testvectors.tv) that simulate all of the possible combinations of switches and checks that LEDs 0 and 1 along with the 7-segment display have the appropriate outputs.
 
+The resulting waveform is pictured below.
 
-<!--
-Explanation of testing approach. How did you verify your design was behaving as expected?
-Statement of whether the design meets all the requirements. If not, list the shortcomings.
-Number of hours spent working on the lab are included.
-Writeup contains minimal spelling or grammar issues and any errors do not significantly detract from clarity of the writeup. -->
+![](images/testbench_waves.png)
+
+When run, the testbench finishes with the following message, indicating a successful run.
+```
+16 tests completed with 0 errors.
+```
+
+## Hardware
+### Board Assembly
+With this particular lab, there was more to do from a hardware perspective than a design perspective. After soldering all of the components to my board, I was having weird power issues where it worked with an input voltage from the 6 V line from a power supply but not the 20 V line (no matter how low that line was set). After lots of troubleshooting, I eventually traced it down to a bad solder joint and after reflowing it the board was working correctly.
+
+Unfortunately, one of my ribbon cable connectors came broken, and I was unable to find any others. I temporarily clamped the connector on with its one functional latch and was able to get about half of the pins working, which was enough for this lab. This connector will need to be replaced in the future.
+
+The assembled board can be seen here:
+
+![](images/board.jpeg)
+
+### 7-Segment Display Circuit
+The 7-segment display uses a common anode, which means that one pin will be connected to power (3.3 V) and all of the other pins will get connected (through a current-limiting resistor) to IO pins in the FPGA. When these pins are pulled low the corresponding LED will turn on.
+
+#### Resistor Calculation
+To determine the appropriate resistor value, I used the forward voltage and current ratings from the 7-segment display [datasheet](https://www.jameco.com/Jameco/Products/ProdDS/335090.pdf?srsltid=AfmBOoptub8HJSHwjrdN-BMRAM1SqDEm5BBs5jDo9P9UJXjvtMfRRwUE).
+According to the datasheet, the voltage drop is typically 2.1 V, so with a 3.3 V supply voltage the resistor will have 1.2 V going through it.
+I wanted to keep the current fairly low to reduce power draw while ensuring the LEDs were bright enough to see, so I targeted a current between 10 mA and 20 mA (the currents used for luminous intensity rating and calculating voltage respectively). Using `R=VI` this gives a desired resistor of between 60 Ω and 120 Ω. I ended up using 100 Ω resistors, which results in 12 mA of current.
+
+## Results
+The final design meets all of the specifications for this lab. .....
