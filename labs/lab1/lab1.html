@@ -115,8 +115,27 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#fpga-design" id="toc-fpga-design" class="nav-link" data-scroll-target="#fpga-design">FPGA Design</a>
+  <ul class="collapse">
+  <li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task">Task</a></li>
+  <li><a href="#approach" id="toc-approach" class="nav-link" data-scroll-target="#approach">Approach</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
+  </ul></li>
+  <li><a href="#hardware" id="toc-hardware" class="nav-link" data-scroll-target="#hardware">Hardware</a>
+  <ul class="collapse">
+  <li><a href="#board-assembly" id="toc-board-assembly" class="nav-link" data-scroll-target="#board-assembly">Board Assembly</a></li>
+  <li><a href="#segment-display-circuit" id="toc-segment-display-circuit" class="nav-link" data-scroll-target="#segment-display-circuit">7-Segment Display Circuit</a></li>
+  <li><a href="#schematic" id="toc-schematic" class="nav-link" data-scroll-target="#schematic">Schematic</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -124,6 +143,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Lab 1: FPGA and MCU Setup and Testing</h1>
+<p class="subtitle lead">Hours spent on lab: 18</p>
 </div>
 
 
@@ -140,8 +160,119 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In Lab 1, the overall goal was to ensure our E155 Development Boards were working correctly and to learn about the process of programming the FPGA and MCU. Both boards (FPGA and MCU) were initially programmed with example code to ensure the software flow was working. Afterwards, the FPGA was programmed with a custom design to control a 7-segment display and several LEDs based on a series of DIP switches.</p>
+</section>
+<section id="fpga-design" class="level2">
+<h2 class="anchored" data-anchor-id="fpga-design">FPGA Design</h2>
+<section id="task" class="level3">
+<h3 class="anchored" data-anchor-id="task">Task</h3>
+<p>Per the <a href="https://hmc-e155.github.io/lab/lab1/#fpga-design">provided specifications</a> for the lab, 4 DIP switches should be used as inputs to control the following outputs:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">OUTPUT</th>
+<th style="text-align: center;">INPUT</th>
+<th style="text-align: center;">OPERATION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">LED 0</td>
+<td style="text-align: center;">S[0:1]</td>
+<td style="text-align: center;">XOR</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">LED 1</td>
+<td style="text-align: center;">S[2:3]</td>
+<td style="text-align: center;">AND</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">LED 2</td>
+<td style="text-align: center;">48 MHz clock</td>
+<td style="text-align: center;">2.4 Hz blink</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">7-Segment Display</td>
+<td style="text-align: center;">S[0:3]</td>
+<td style="text-align: center;">binary decoder</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="approach" class="level3">
+<h3 class="anchored" data-anchor-id="approach">Approach</h3>
+<p>To aid in debugging and reusability, I broke this into several SystemVerilog modules, each contained within its own file. I used the following modules:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">SystemVerilog Module</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">lab1_jc</td>
+<td style="text-align: center;">FPGA specific module, includes clock module</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">top</td>
+<td style="text-align: center;">top-level, non FPGA-specific module</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">seg_decoder</td>
+<td style="text-align: center;">7-segment display decoder</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">pulse</td>
+<td style="text-align: center;">Output pulse of desired frequency based on clk</td>
+</tr>
+</tbody>
+</table>
+<p>The following block diagram shows how these modules fit together and the inputs/outputs of each.</p>
+<p><img src="images/block_diagram.png" class="img-fluid"></p>
+<p>The FPGA-specific module can be found <a href="https://github.com/jordancarlin/e155-lab1/blob/main/fpga/radiant_project/e155_lab1/source/lab1_jc.sv">here</a> and all of the other SystemVerilog modules are <a href="https://github.com/jordancarlin/e155-lab1/tree/main/fpga/src">here</a>.</p>
+</section>
+<section id="testing" class="level3">
+<h3 class="anchored" data-anchor-id="testing">Testing</h3>
+<p>I ran into lots of issues with QuestaSim on my personal computer (tried both Linux and Windows), but was eventually able to get it running by manually recompiling the files from within the Questa GUI. I’ll probably switch to using the <code>vsim</code> cli going forwards to avoid issues and automate this process.</p>
+<p>Once I had Questa working, I created a testbench to verify my Verilog was working correctly. Since all of the modules are very simple in this case, I went with a single top-level testbench that runs on the <code>top</code> module (excluding the FPGA specific components). This [testbench] (https://github.com/jordancarlin/e155-lab1/blob/main/fpga/testbench/lab1_tb.sv) loads a series of <a href="https://github.com/jordancarlin/e155-lab1/blob/main/fpga/testbench/lab1_testvectors.tv">testvectors</a> that simulate all of the possible combinations of switches and checks that LEDs 0 and 1 along with the 7-segment display have the appropriate outputs.</p>
+<p>The resulting waveform is pictured below.</p>
+<p><img src="images/testbench_waves.png" class="img-fluid"></p>
+<p>When run, the testbench finishes with the following message, indicating a successful run.</p>
+<pre><code>16 tests completed with 0 errors.</code></pre>
+</section>
+</section>
+<section id="hardware" class="level2">
+<h2 class="anchored" data-anchor-id="hardware">Hardware</h2>
+<section id="board-assembly" class="level3">
+<h3 class="anchored" data-anchor-id="board-assembly">Board Assembly</h3>
+<p>With this particular lab, there was more to do from a hardware perspective than a design perspective. After soldering all of the components to my board, I was having weird power issues where it worked with an input voltage from the 6 V line from a power supply but not the 20 V line (no matter how low that line was set). After lots of troubleshooting, I eventually traced it down to a bad solder joint and after reflowing it the board was working correctly.</p>
+<p>Unfortunately, one of my ribbon cable connectors came broken, and I was unable to find any others. I temporarily clamped the connector on with its one functional latch and was able to get about half of the pins working, which was enough for this lab. This connector will need to be replaced in the future.</p>
+<p>The assembled board can be seen here:</p>
+<p><img src="images/board.jpeg" class="img-fluid"></p>
+</section>
+<section id="segment-display-circuit" class="level3">
+<h3 class="anchored" data-anchor-id="segment-display-circuit">7-Segment Display Circuit</h3>
+<p>The 7-segment display uses a common anode, which means that one pin will be connected to power (3.3 V) and all of the other pins will get connected (through a current-limiting resistor) to IO pins in the FPGA. When these pins are pulled low the corresponding LED will turn on.</p>
+<section id="resistor-calculation" class="level4">
+<h4 class="anchored" data-anchor-id="resistor-calculation">Resistor Calculation</h4>
+<p>To determine the appropriate resistor value, I used the forward voltage and current ratings from the 7-segment display <a href="https://www.jameco.com/Jameco/Products/ProdDS/335090.pdf?srsltid=AfmBOoptub8HJSHwjrdN-BMRAM1SqDEm5BBs5jDo9P9UJXjvtMfRRwUE">datasheet</a>. According to the datasheet, the voltage drop is typically 2.1 V, so with a 3.3 V supply voltage the resistor will have 1.2 V going through it. I wanted to keep the current fairly low to reduce power draw while ensuring the LEDs were bright enough to see, so I targeted a current between 10 mA and 20 mA (the currents used for luminous intensity rating and calculating voltage respectively). Using <code>R=VI</code> this gives a desired resistor of between 60 Ω and 120 Ω. I ended up using 100 Ω resistors, which results in 12 mA of current.</p>
+</section>
+</section>
+<section id="schematic" class="level3">
+<h3 class="anchored" data-anchor-id="schematic">Schematic</h3>
+<p>The overall schematic for the circuit includes the FPGA, DIP switches, LEDs, and 7-segment display. It is shown below.</p>
+<p><img src="images/schematic.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The final design meets all of the specifications for this lab. The E155 development board is fully assembled and functional (barring the replacement of the broken ribbon cable connector). The FPGA is programmed with synthesized Verilog that is driving the LEDs and 7-segment display per the provided guidelines and has been tested both in simulation using a testbench and in hardware. The 7-segment display is capable of displaying all of the digits in a unique manner with constant brightness.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
