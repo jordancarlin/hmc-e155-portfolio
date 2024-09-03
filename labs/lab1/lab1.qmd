@@ -65,7 +65,9 @@ To determine the appropriate resistor value, I used the forward voltage and curr
 According to the datasheet, the voltage drop is typically 2.1 V, so with a 3.3 V supply voltage the resistor will have 1.2 V going through it.
 I wanted to keep the current fairly low to reduce power draw while ensuring the LEDs were bright enough to see, so I targeted a current between 10 mA and 20 mA (the currents used for luminous intensity rating and calculating voltage respectively). Using `R=VI` this gives a desired resistor of between 60 Ω and 120 Ω. I ended up using 100 Ω resistors, which results in 12 mA of current.
 
-#### Schematic
+### Schematic
+The overall schematic for the circuit includes the FPGA, DIP switches, LEDs, and 7-segment display. It is shown below.
+
 ![](images/schematic.png)
 
 ## Results
