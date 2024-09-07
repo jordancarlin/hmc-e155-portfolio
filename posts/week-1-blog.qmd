@@ -1,0 +1,11 @@
+---
+title: "MicroPs Week 1 Reflections"
+description: "Wow! That's a lot of soldering!"
+author: "Jordan Carlin"
+date: "9/6/24"
+categories:
+  - reflection
+draft: false
+---
+
+Wow! Lab 1 is in the books. For a lab that seemed so simple, it sure took a while (18 hours!). With this lab, the difficulty was mostly in all of the setup. I've soldered plenty before, but never anything like this! All of the tiny SMT components were crazy (it felt like I needed a magnifying glass!) and there were enough through-hole components to drive anyone crazy. Right when I thought I was done with all the preparation, I ran into roadblock after roadblock getting all the software setup and ready to go. From magical cables (my cable didn't work to flash the J-Link firmware onto my MCU but after using another cable to flash it mine worked fine for programming) to crazy synthesis (Radiant will synthesize on my Linux partition but won't program the FPGA) to utterly nonsensical Questa issues (It only works if I manually create the work library, launch it using one of the Questa buttons in Lattice, close it, and relaunch it using the other button), there were lots of speed-bumps getting everything ready to go. Now that it is all (mostly) working though, I'm excited to get going on the future labs that will let me focus more on the actual design. Looking forward to getting into some more complicated Verilog projects with lab 2!
