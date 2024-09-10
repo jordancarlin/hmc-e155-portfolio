@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -115,8 +144,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#design-and-testing-methodology" id="toc-design-and-testing-methodology" class="nav-link" data-scroll-target="#design-and-testing-methodology">Design and Testing Methodology</a></li>
+  <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation:</a>
+  <ul class="collapse">
+  <li><a href="#block-diagram" id="toc-block-diagram" class="nav-link" data-scroll-target="#block-diagram">Block Diagram</a></li>
+  <li><a href="#schematic" id="toc-schematic" class="nav-link" data-scroll-target="#schematic">Schematic</a></li>
+  </ul></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a>
+  <ul class="collapse">
+  <li><a href="#testbench-simulation" id="toc-testbench-simulation" class="nav-link" data-scroll-target="#testbench-simulation">Testbench Simulation</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -140,8 +186,112 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this lab, a design was implemented on the FPGA to read a 4-bit binary input from two sets of switches and display both numbers on a 2-digit seven-segment display. The sum of the two numbers is also computed and displayed in binary on a series of five LEDs. Time multiplexing is used to reduce the hardware cost of displaying two digits by using a single decoder module and set of output pins.</p>
+</section>
+<section id="design-and-testing-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="design-and-testing-methodology">Design and Testing Methodology</h2>
+<p>The overall project was broken up into several smaller Verilog modules. A simple adder and the 7-segment display decoder from Lab 1 were combined with a new pulse module that contained most of the logic. The pulse module takes both sets of switches as inputs and, using a counter to produce a slower clock, alternates which set of switches is sent to the 7-segment decoder. It also ensures that the appropriate anode is activated.</p>
+<p>The physical design was setup to ensure that the maximum current from the FPGA pins was not exceeded, which necessitated the use of transistors to drive the 7-segment displays.</p>
+<p>The Verilog modules were tested using a testbench that applied testvectors covering most corner cases (extremes in this case) along with several other random vectors. It did not seem necessary to test every possible input combination as that number quickly explodes. The physical design was tested using a wide variety of different possible inputs.</p>
+</section>
+<section id="technical-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation:</h2>
+<p>The source code for the project can be found in the associated <a href="https://github.com/jordancarlin/e155-lab2">GitHub repository</a>.</p>
+<section id="block-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="block-diagram">Block Diagram</h3>
+<div id="fig-block-diagram" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-block-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/block-diagram.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-block-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Block diagram of the Verilog design.
+</figcaption>
+</figure>
+</div>
+<p>The block diagram in <a href="#fig-block-diagram" class="quarto-xref">Figure&nbsp;1</a> demonstrates the overall architecture of the design. The various modules are described here:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">SystemVerilog Module</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>lab2_jc</code></td>
+<td style="text-align: center;">FPGA specific module, includes high speed oscillator module</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>top</code></td>
+<td style="text-align: center;">Top-level, non FPGA-specific module</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>seg_decoder</code></td>
+<td style="text-align: center;">7-segment display decoder</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>pulse</code></td>
+<td style="text-align: center;">Rapidly switches which digit of the display is active</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>adder</code></td>
+<td style="text-align: center;">Computes the sum of the two inputs</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="schematic" class="level3">
+<h3 class="anchored" data-anchor-id="schematic">Schematic</h3>
+<div id="fig-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/schematic.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Schematic of the physical circuit.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-schematic" class="quarto-xref">Figure&nbsp;2</a> shows the physical layout of the design.</p>
+<ul>
+<li>An internal 100 k<span class="math inline">\(\Omega\)</span> pullup resistor was used to ensure the input switches were not floating.</li>
+<li>The transistors were connected to the FPGA through a 330 <span class="math inline">\(\Omega\)</span> current-limiting resistor to ensure that they didn’t pull more than 8 mA, the maximum the FPGA I/O pins can supply (see table 4.13 of the FPGA <a href="https://hmc-e155.github.io/assets/doc/FPGA-DS-02008-2-0-iCE40-UltraPlus-Family-Data-Sheet.pdf">datasheet</a>). Per their <a href="https://www.onsemi.com/pdf/datasheet/2n3906-d.pdf">datasheet</a>, the transistors have a voltage drop of 0.65 V, so 330 <span class="math inline">\(\Omega\)</span> works perfectly based on Ohm’s Law.</li>
+<li>The LEDs in the 7-segment display have a voltage drop of 2.1 V (<a href="https://www.alldatasheet.com/datasheet-pdf/view/118288/HP/HDSP-5721.html">datasheet</a>), so a current-limiting resistor of 150 <span class="math inline">\(\Omega\)</span> limits the current through the FPGA to 8 mA.</li>
+<li>The output LEDs for the sum have a voltage drop of 2.35 V (<a href="https://www.lumex.com/datasheet/SSA-LXB10HW-GF+LP">datasheet</a>), so 120 <span class="math inline">\(\Omega\)</span> current-limiting resistors were selected.</li>
+</ul>
+</section>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
+<section id="testbench-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="testbench-simulation">Testbench Simulation</h3>
+<div id="fig-testbench" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testbench-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/testbench.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testbench-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: A screenshot of a QuestaSim simulation.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-testbench" class="quarto-xref">Figure&nbsp;3</a> shows a screenshot of the QuestaSim simulation validating the Verilog. The physical design works when deployed on the FPGA. The design meets all intended design objectives and specifications.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The design successfully displays two digits on the 7-segment display at the same time with only one set of pins by utilizing time-multiplexing. The LEDs show the correct sum for all input digits.</p>
+<p>I spent a total of 13 hours working on this lab.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
