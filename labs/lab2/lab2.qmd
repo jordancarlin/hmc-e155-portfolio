@@ -69,4 +69,4 @@ A screenshot of a QuestaSim simulation.
 
 The design successfully displays two digits on the 7-segment display at the same time with only one set of pins by utilizing time-multiplexing. The LEDs show the correct sum for all input digits.
 
-I spent a total of 12 hours working on this lab.
+I spent a total of 13 hours working on this lab.
