@@ -1,0 +1,13 @@
+---
+title: "MicroPs Week 2 Reflections"
+description: "The return of Verilog"
+author: "Jordan Carlin"
+date: "9/13/24"
+categories:
+  - reflection
+draft: false
+---
+
+Hard to believe that we're already over a quarter of the way done with the labs for MicroPs. I had a lot more fun with this lab than the previous one because it gave me a chance to dive into more digital design and (mostly) move on from fighting with tools (I still can'st seem to program the FPGA from my computer). While the seven-segment display decoder was fairly simple and basically just reused my module from last week, the pulse module that allowed for two digits to be driven using time-multiplexing was a bit more of a challenge. While the final logic ended up being fairly elegant, it took a while to think through some of the edge cases and picking an appropriate frequency to switch between the digits also took some trial and error.
+
+I had an interesting bug that caused one of my digits to occasionally be off by one from the input number, and it seemed to be happening inconsistently. The variability of it and the fact that my design worked in simulation led me to believe it was a hardware problem, and after a lot of very meticulous debugging with a much slower switching frequency. I traced it down to one of my input pins not working consistently. After switching to a different pin everything worked correctly, but I still need to investigate what the problem with the other pin was. I'm assuming a soldering issue. I will likely need to figure this out for next week or I suspect I will run out of pins. Looking forward to a much more complicated design project for the next lab.
