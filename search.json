@@ -7,53 +7,60 @@
     "text": "I’m very excited to begin my journey into the world of microprocessors and embedded systems in this class. While I have some experience with FPGAs from my internship with Masimo this past summer, they’re still relatively new to me and I’m looking forward to learning more about the ins and outs of how to use them. I’m also interested in learning more about when to use an FPGA vs MCU and how to program an ARM MCU (most of my experience so far is with RISC-V)."
   },
   {
-    "objectID": "labs.html#lab-2-multiplexed-7-segment-display",
-    "href": "labs.html#lab-2-multiplexed-7-segment-display",
-    "title": "Labs",
-    "section": "Lab 2: Multiplexed 7-Segment Display",
-    "text": "Lab 2: Multiplexed 7-Segment Display"
-  },
-  {
-    "objectID": "labs.html#lab-3-keypad-scanner",
-    "href": "labs.html#lab-3-keypad-scanner",
-    "title": "Labs",
-    "section": "Lab 3: Keypad Scanner",
-    "text": "Lab 3: Keypad Scanner"
-  },
-  {
-    "objectID": "labs.html#lab-4-digital-audio",
-    "href": "labs.html#lab-4-digital-audio",
-    "title": "Labs",
-    "section": "Lab 4: Digital Audio",
-    "text": "Lab 4: Digital Audio"
-  },
-  {
-    "objectID": "labs.html#lab-5-interrupts",
-    "href": "labs.html#lab-5-interrupts",
-    "title": "Labs",
-    "section": "Lab 5: Interrupts",
-    "text": "Lab 5: Interrupts"
-  },
-  {
-    "objectID": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
-    "href": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
-    "title": "Labs",
-    "section": "Lab 6: The Internet of Things and Serial Peripheral Interface",
-    "text": "Lab 6: The Internet of Things and Serial Peripheral Interface"
-  },
-  {
-    "objectID": "labs.html#lab-7-the-advanced-encryption-standard-aes",
-    "href": "labs.html#lab-7-the-advanced-encryption-standard-aes",
-    "title": "Labs",
-    "section": "Lab 7: The Advanced Encryption Standard (AES)",
-    "text": "Lab 7: The Advanced Encryption Standard (AES)"
-  },
-  {
-    "objectID": "resources.html",
-    "href": "resources.html",
-    "title": "Resources",
+    "objectID": "posts/week-2-blog.html",
+    "href": "posts/week-2-blog.html",
+    "title": "MicroPs Week 2 Reflections",
     "section": "",
-    "text": "HMC E155 Course Website"
+    "text": "Hard to believe that we’re already over a quarter of the way done with the labs for MicroPs. I had a lot more fun with this lab than the previous one because it gave me a chance to dive into more digital design and (mostly) move on from fighting with tools (I still can’st seem to program the FPGA from my computer). While the seven-segment display decoder was fairly simple and basically just reused my module from last week, the pulse module that allowed for two digits to be driven using time-multiplexing was a bit more of a challenge. While the final logic ended up being fairly elegant, it took a while to think through some of the edge cases and picking an appropriate frequency to switch between the digits also took some trial and error.\nI had an interesting bug that caused one of my digits to occasionally be off by one from the input number, and it seemed to be happening inconsistently. The variability of it and the fact that my design worked in simulation led me to believe it was a hardware problem, and after a lot of very meticulous debugging with a much slower switching frequency. I traced it down to one of my input pins not working consistently. After switching to a different pin everything worked correctly, but I still need to investigate what the problem with the other pin was. I’m assuming a soldering issue. I will likely need to figure this out for next week or I suspect I will run out of pins. Looking forward to a much more complicated design project for the next lab."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "E155 Portfolio",
+    "section": "",
+    "text": "Jordan Carlin is a junior engineering major at Harvey Mudd College interested in computer engineering and digital design. He is currently doing research as a Clay-Wolkin Fellow at Harvey Mudd’s VLSI lab working on a superscalar implementation of the open-source OpenHW-Group CVW RISC-V SoC. He has experience with SystemVerilog and RISC-V assembly and would love to continue growing his computer engineering skills. He’s always excited to learn new things and would be happy to connect with you!"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "E155 Blog",
+    "section": "",
+    "text": "MicroPs Week 2 Reflections\n\n\n\n\n\nThe return of Verilog\n\n\n\n\n\nSep 13, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 1 Reflections\n\n\n\n\n\nWow! That’s a lot of soldering!\n\n\n\n\n\nSep 6, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nInitial Learning Goals\n\n\n\n\n\nWhat I want to get out of MicroPs\n\n\n\n\n\nAug 30, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "labs/lab1/lab1.html",
+    "href": "labs/lab1/lab1.html",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "",
+    "text": "In Lab 1, the overall goal was to ensure our E155 Development Boards were working correctly and to learn about the process of programming the FPGA and MCU. Both boards (FPGA and MCU) were initially programmed with example code to ensure the software flow was working. Afterwards, the FPGA was programmed with a custom design to control a 7-segment display and several LEDs based on a series of DIP switches."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html#introduction",
+    "href": "labs/lab1/lab1.html#introduction",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "",
+    "text": "In Lab 1, the overall goal was to ensure our E155 Development Boards were working correctly and to learn about the process of programming the FPGA and MCU. Both boards (FPGA and MCU) were initially programmed with example code to ensure the software flow was working. Afterwards, the FPGA was programmed with a custom design to control a 7-segment display and several LEDs based on a series of DIP switches."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html#fpga-design",
+    "href": "labs/lab1/lab1.html#fpga-design",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "FPGA Design",
+    "text": "FPGA Design\n\nTask\nPer the provided specifications for the lab, 4 DIP switches should be used as inputs to control the following outputs:\n\n\n\nOUTPUT\nINPUT\nOPERATION\n\n\n\n\nLED 0\nS[0:1]\nXOR\n\n\nLED 1\nS[2:3]\nAND\n\n\nLED 2\n48 MHz clock\n2.4 Hz blink\n\n\n7-Segment Display\nS[0:3]\nbinary decoder\n\n\n\n\n\nApproach\nTo aid in debugging and reusability, I broke this into several SystemVerilog modules, each contained within its own file. I used the following modules:\n\n\n\nSystemVerilog Module\nDescription\n\n\n\n\nlab1_jc\nFPGA specific module, includes clock module\n\n\ntop\ntop-level, non FPGA-specific module\n\n\nseg_decoder\n7-segment display decoder\n\n\npulse\nOutput pulse of desired frequency based on clk\n\n\n\nThe following block diagram shows how these modules fit together and the inputs/outputs of each.\n\nThe FPGA-specific module can be found here and all of the other SystemVerilog modules are here.\n\n\nTesting\nI ran into lots of issues with QuestaSim on my personal computer (tried both Linux and Windows), but was eventually able to get it running by manually recompiling the files from within the Questa GUI. I’ll probably switch to using the vsim cli going forwards to avoid issues and automate this process.\nOnce I had Questa working, I created a testbench to verify my Verilog was working correctly. Since all of the modules are very simple in this case, I went with a single top-level testbench that runs on the top module (excluding the FPGA specific components). This testbench loads a series of testvectors that simulate all of the possible combinations of switches and checks that LEDs 0 and 1 along with the 7-segment display have the appropriate outputs.\nThe resulting waveform is pictured below.\n\nWhen run, the testbench finishes with the following message, indicating a successful run.\n16 tests completed with 0 errors."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html#hardware",
+    "href": "labs/lab1/lab1.html#hardware",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "Hardware",
+    "text": "Hardware\n\nBoard Assembly\nWith this particular lab, there was more to do from a hardware perspective than a design perspective. After soldering all of the components to my board, I was having weird power issues where it worked with an input voltage from the 6 V line from a power supply but not the 20 V line (no matter how low that line was set). After lots of troubleshooting, I eventually traced it down to a bad solder joint and after reflowing it the board was working correctly.\nUnfortunately, one of my ribbon cable connectors came broken, and I was unable to find any others. I temporarily clamped the connector on with its one functional latch and was able to get about half of the pins working, which was enough for this lab. This connector will need to be replaced in the future.\nThe assembled board can be seen here:\n\n\n\n7-Segment Display Circuit\nThe 7-segment display uses a common anode, which means that one pin will be connected to power (3.3 V) and all of the other pins will get connected (through a current-limiting resistor) to IO pins in the FPGA. When these pins are pulled low the corresponding LED will turn on.\n\nResistor Calculation\nTo determine the appropriate resistor value, I used the forward voltage and current ratings from the 7-segment display datasheet. According to the datasheet, the voltage drop is typically 2.1 V, so with a 3.3 V supply voltage the resistor will have 1.2 V going through it. I wanted to keep the current fairly low to reduce power draw while ensuring the LEDs were bright enough to see, so I targeted a current between 10 mA and 20 mA (the currents used for luminous intensity rating and calculating voltage respectively). Using R=VI this gives a desired resistor of between 60 Ω and 120 Ω. I ended up using 100 Ω resistors, which results in 12 mA of current.\n\n\n\nSchematic\nThe overall schematic for the circuit includes the FPGA, DIP switches, LEDs, and 7-segment display. It is shown below."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html#results",
+    "href": "labs/lab1/lab1.html#results",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "Results",
+    "text": "Results\nThe final design meets all of the specifications for this lab. The E155 development board is fully assembled and functional (barring the replacement of the broken ribbon cable connector). The FPGA is programmed with synthesized Verilog that is driving the LEDs and 7-segment display per the provided guidelines and has been tested both in simulation using a testbench and in hardware. The 7-segment display is capable of displaying all of the digits in a unique manner with constant brightness."
   },
   {
     "objectID": "labs/lab2/lab2.html",
@@ -98,53 +105,53 @@
     "text": "Conclusion\nThe design successfully displays two digits on the 7-segment display at the same time with only one set of pins by utilizing time-multiplexing. The LEDs show the correct sum for all input digits.\nI spent a total of 13 hours working on this lab."
   },
   {
-    "objectID": "labs/lab1/lab1.html",
-    "href": "labs/lab1/lab1.html",
-    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
     "section": "",
-    "text": "In Lab 1, the overall goal was to ensure our E155 Development Boards were working correctly and to learn about the process of programming the FPGA and MCU. Both boards (FPGA and MCU) were initially programmed with example code to ensure the software flow was working. Afterwards, the FPGA was programmed with a custom design to control a 7-segment display and several LEDs based on a series of DIP switches."
+    "text": "HMC E155 Course Website"
   },
   {
-    "objectID": "labs/lab1/lab1.html#introduction",
-    "href": "labs/lab1/lab1.html#introduction",
-    "title": "Lab 1: FPGA and MCU Setup and Testing",
-    "section": "",
-    "text": "In Lab 1, the overall goal was to ensure our E155 Development Boards were working correctly and to learn about the process of programming the FPGA and MCU. Both boards (FPGA and MCU) were initially programmed with example code to ensure the software flow was working. Afterwards, the FPGA was programmed with a custom design to control a 7-segment display and several LEDs based on a series of DIP switches."
+    "objectID": "labs.html#lab-2-multiplexed-7-segment-display",
+    "href": "labs.html#lab-2-multiplexed-7-segment-display",
+    "title": "Labs",
+    "section": "Lab 2: Multiplexed 7-Segment Display",
+    "text": "Lab 2: Multiplexed 7-Segment Display"
   },
   {
-    "objectID": "labs/lab1/lab1.html#fpga-design",
-    "href": "labs/lab1/lab1.html#fpga-design",
-    "title": "Lab 1: FPGA and MCU Setup and Testing",
-    "section": "FPGA Design",
-    "text": "FPGA Design\n\nTask\nPer the provided specifications for the lab, 4 DIP switches should be used as inputs to control the following outputs:\n\n\n\nOUTPUT\nINPUT\nOPERATION\n\n\n\n\nLED 0\nS[0:1]\nXOR\n\n\nLED 1\nS[2:3]\nAND\n\n\nLED 2\n48 MHz clock\n2.4 Hz blink\n\n\n7-Segment Display\nS[0:3]\nbinary decoder\n\n\n\n\n\nApproach\nTo aid in debugging and reusability, I broke this into several SystemVerilog modules, each contained within its own file. I used the following modules:\n\n\n\nSystemVerilog Module\nDescription\n\n\n\n\nlab1_jc\nFPGA specific module, includes clock module\n\n\ntop\ntop-level, non FPGA-specific module\n\n\nseg_decoder\n7-segment display decoder\n\n\npulse\nOutput pulse of desired frequency based on clk\n\n\n\nThe following block diagram shows how these modules fit together and the inputs/outputs of each.\n\nThe FPGA-specific module can be found here and all of the other SystemVerilog modules are here.\n\n\nTesting\nI ran into lots of issues with QuestaSim on my personal computer (tried both Linux and Windows), but was eventually able to get it running by manually recompiling the files from within the Questa GUI. I’ll probably switch to using the vsim cli going forwards to avoid issues and automate this process.\nOnce I had Questa working, I created a testbench to verify my Verilog was working correctly. Since all of the modules are very simple in this case, I went with a single top-level testbench that runs on the top module (excluding the FPGA specific components). This testbench loads a series of testvectors that simulate all of the possible combinations of switches and checks that LEDs 0 and 1 along with the 7-segment display have the appropriate outputs.\nThe resulting waveform is pictured below.\n\nWhen run, the testbench finishes with the following message, indicating a successful run.\n16 tests completed with 0 errors."
+    "objectID": "labs.html#lab-3-keypad-scanner",
+    "href": "labs.html#lab-3-keypad-scanner",
+    "title": "Labs",
+    "section": "Lab 3: Keypad Scanner",
+    "text": "Lab 3: Keypad Scanner"
   },
   {
-    "objectID": "labs/lab1/lab1.html#hardware",
-    "href": "labs/lab1/lab1.html#hardware",
-    "title": "Lab 1: FPGA and MCU Setup and Testing",
-    "section": "Hardware",
-    "text": "Hardware\n\nBoard Assembly\nWith this particular lab, there was more to do from a hardware perspective than a design perspective. After soldering all of the components to my board, I was having weird power issues where it worked with an input voltage from the 6 V line from a power supply but not the 20 V line (no matter how low that line was set). After lots of troubleshooting, I eventually traced it down to a bad solder joint and after reflowing it the board was working correctly.\nUnfortunately, one of my ribbon cable connectors came broken, and I was unable to find any others. I temporarily clamped the connector on with its one functional latch and was able to get about half of the pins working, which was enough for this lab. This connector will need to be replaced in the future.\nThe assembled board can be seen here:\n\n\n\n7-Segment Display Circuit\nThe 7-segment display uses a common anode, which means that one pin will be connected to power (3.3 V) and all of the other pins will get connected (through a current-limiting resistor) to IO pins in the FPGA. When these pins are pulled low the corresponding LED will turn on.\n\nResistor Calculation\nTo determine the appropriate resistor value, I used the forward voltage and current ratings from the 7-segment display datasheet. According to the datasheet, the voltage drop is typically 2.1 V, so with a 3.3 V supply voltage the resistor will have 1.2 V going through it. I wanted to keep the current fairly low to reduce power draw while ensuring the LEDs were bright enough to see, so I targeted a current between 10 mA and 20 mA (the currents used for luminous intensity rating and calculating voltage respectively). Using R=VI this gives a desired resistor of between 60 Ω and 120 Ω. I ended up using 100 Ω resistors, which results in 12 mA of current.\n\n\n\nSchematic\nThe overall schematic for the circuit includes the FPGA, DIP switches, LEDs, and 7-segment display. It is shown below."
+    "objectID": "labs.html#lab-4-digital-audio",
+    "href": "labs.html#lab-4-digital-audio",
+    "title": "Labs",
+    "section": "Lab 4: Digital Audio",
+    "text": "Lab 4: Digital Audio"
   },
   {
-    "objectID": "labs/lab1/lab1.html#results",
-    "href": "labs/lab1/lab1.html#results",
-    "title": "Lab 1: FPGA and MCU Setup and Testing",
-    "section": "Results",
-    "text": "Results\nThe final design meets all of the specifications for this lab. The E155 development board is fully assembled and functional (barring the replacement of the broken ribbon cable connector). The FPGA is programmed with synthesized Verilog that is driving the LEDs and 7-segment display per the provided guidelines and has been tested both in simulation using a testbench and in hardware. The 7-segment display is capable of displaying all of the digits in a unique manner with constant brightness."
+    "objectID": "labs.html#lab-5-interrupts",
+    "href": "labs.html#lab-5-interrupts",
+    "title": "Labs",
+    "section": "Lab 5: Interrupts",
+    "text": "Lab 5: Interrupts"
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "E155 Blog",
-    "section": "",
-    "text": "MicroPs Week 1 Reflections\n\n\n\n\n\nWow! That’s a lot of soldering!\n\n\n\n\n\nSep 6, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nInitial Learning Goals\n\n\n\n\n\nWhat I want to get out of MicroPs\n\n\n\n\n\nAug 30, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\nNo matching items"
+    "objectID": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
+    "href": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
+    "title": "Labs",
+    "section": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "text": "Lab 6: The Internet of Things and Serial Peripheral Interface"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "E155 Portfolio",
-    "section": "",
-    "text": "Jordan Carlin is a junior engineering major at Harvey Mudd College interested in computer engineering and digital design. He is currently doing research as a Clay-Wolkin Fellow at Harvey Mudd’s VLSI lab working on a superscalar implementation of the open-source OpenHW-Group CVW RISC-V SoC. He has experience with SystemVerilog and RISC-V assembly and would love to continue growing his computer engineering skills. He’s always excited to learn new things and would be happy to connect with you!"
+    "objectID": "labs.html#lab-7-the-advanced-encryption-standard-aes",
+    "href": "labs.html#lab-7-the-advanced-encryption-standard-aes",
+    "title": "Labs",
+    "section": "Lab 7: The Advanced Encryption Standard (AES)",
+    "text": "Lab 7: The Advanced Encryption Standard (AES)"
   },
   {
     "objectID": "posts/week-1-blog.html",
