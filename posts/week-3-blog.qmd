@@ -1,0 +1,11 @@
+---
+title: "MicroPs Week 3 Reflections"
+description: "The Pain of the Keypad Scanner"
+author: "Jordan Carlin"
+date: "9/20/24"
+categories:
+  - reflection
+draft: false
+---
+
+Wow! What a week. I knew that the [keypad scanner lab](../labs/lab3/lab3.qmd) was a notoriously difficult one, but I still wasn't expecting this! I went into it fairly confident. I quickly created a state transition diagram for an FSM that I thought would do what I needed, wrote some Verilog, and wired up my circuit. I was expecting there to be some bugs when I fired up the system for the first time, but I was expecting them to be fairly minor and for the debugging process to be fairly painless (like it had been for the other labs). How wrong I was. My initial attempt gave me nothing but zeroes on the display no matter what buttons I pushed. Even 20 hours down the road, I'm still seemingly pretty far from a working system. After changing my FSM, rewiring parts of my circuit, and hours of investigating with an oscilloscope, I have some numbers appearing correctly occasionally. That's far from where I wanted to be at this point. Up until now in E85 and in MicroPs I've gotten lucky (and just been dealing with simpler systems) with my designs and have had to do fairly little debugging. This lab has been an eye-opening experience into just how wrong things can go and how hard it can be to nail down the little details and figure out exactly why something isn't working. While I've spent far too long on this lab already, I'm enjoying the process and am learning a lot about troubleshooting. Looking forward to finally getting it working the way it should be!
