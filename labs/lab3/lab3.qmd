@@ -2,4 +2,160 @@
 title: "Lab 3 - Keypad Scanner"
 ---
 
-## Work In Progress
+## Introduction
+
+In this lab, a design was implemented on an FPGA to scan a 16-button keypad for input and display the input characters on a 2-digit seven-segment display. 2 characters are displayed at a time and they are retained until new characters are input. The system is resistant to switch bouncing and multiple button presses.
+
+
+## Design and Testing Methodology
+
+The overall project was split up into several smaller Verilog modules. See @tbl-modules for all of the modules. At a high level, the system was broken down into dedicated decoders for the keypad and 7-segment display, a controller FSM, and several counters. A synchronizer was also used to avoid metastability from the asynchronous inputs. Many of the modules from [Lab 2](https://github.com/jordancarlin/e155-lab2) were used almost unchanged to drive the 7-segment display logic. The main design challenge came in the FSM, which also incorporated switch debouncing and the control logic to retain previous numbers. This is explained in more detail in the FSM section.
+
+The physical design was setup to ensure that the maximum current from the FPGA pins was not exceeded, which necessitated the use of transistors to drive the 7-segment displays. The keypad was setup to use pull-up resistors so that the internal FPGA resistors could be used.
+
+The Verilog modules were tested using several testbenches that applied testvectors covering a variety of different possible inputs. It did not seem necessary to test every possible input combination as that number quickly explodes. The physical design was tested using a wide range of different possible inputs.
+
+## Technical Documentation:
+
+The source code for the project can be found in the associated [GitHub repository](https://github.com/jordancarlin/e155-lab3).
+
+### Block Diagram
+
+::: {#fig-block-diagram}
+![](images/block-diagram.png)
+
+Block diagram of the Verilog design.
+:::
+
+The block diagram in @fig-block-diagram demonstrates the overall architecture of the design.
+The various modules are described here:
+
+| SystemVerilog Module | Description |
+|:----:|:----:|
+| `lab3_jc` | FPGA specific module, includes high speed oscillator module |
+| `top` | Top-level, non FPGA-specific module |
+| `sync` | Synchronizer with two flops |
+| `key_scan` | Main FSM module to drive keypad row scanning and updating of stored numbers |
+| `counter` | Counter used to reduce the speed of the clock |
+| `key_decoder` | 16-button keypad decoder |
+| `seg_decoder` | 7-segment display decoder |
+| `pulse` | Rapidly switches which digit of the 7-segment display is active |
+
+: Verilog Modules {#tbl-modules}
+
+### Finite-State Machine {#sec-fsm}
+
+The following state transition diagram and table explain the operation of the main `key_scan` fsm. In addition to the state and inputs, the FSM is also reliant on a counter to determine several of the state transitions. This counter is reset or incremented depending on the current state and is used to address the latency introduced by the synchronizer and avoid switch bouncing.
+
+For switch bouncing in particular, the POSSIBLE_PRESSED state only transitions to the PRESSED state if a button is held down for 15 continuous clock cycles. This will avoid counting any bouncing as a press. Once in the WAITING state (which happens after a button is pressed) the FSM does not resume scanning until after the button is released and a set period of time (300 clock cycles) has elapsed. This approach introduces some additional latency, but due ot the relatively high speed of the clock it is not enough to make a difference to the user so seems like an acceptable debouncing strategy.
+
+::: {#fig-fsm}
+![](images/fsm.png)
+
+State transition diagram of `key_scan` fsm
+:::
+
++------------------+--------------------+---------------------------------------+
+| Current State    | Outputs            | Next State                            |
++:================:+:==================:+:=====================================:+
+| IDLE             | `clearCounter = 1` | R0                                    |
++------------------+--------------------+---------------------------------------+
+| R0               | `clearCounter = 1` | R0_CHECK                              |
+|                  |                    |                                       |
+|                  | `rowChange = 1`    |                                       |
+|                  |                    |                                       |
+|                  | `newRows = 0001`   |                                       |
++------------------+--------------------+---------------------------------------+
+| R1               | `clearCounter = 1` | R1_CHECK                              |
+|                  |                    |                                       |
+|                  | `rowChange = 1`    |                                       |
+|                  |                    |                                       |
+|                  | `newRows = 0010`   |                                       |
++------------------+--------------------+---------------------------------------+
+| R2               | `clearCounter = 1` | R2_CHECK                              |
+|                  |                    |                                       |
+|                  | `rowChange = 1`    |                                       |
+|                  |                    |                                       |
+|                  | `newRows = 0100`   |                                       |
++------------------+--------------------+---------------------------------------+
+| R3               | `clearCounter = 1` | R3_CHECK                              |
+|                  |                    |                                       |
+|                  | `rowChange = 1`    |                                       |
+|                  |                    |                                       |
+|                  | `newRows = 1000`   |                                       |
++------------------+--------------------+---------------------------------------+
+| R0_CHECK         | `incCount = 1`     | `|cols`: POSSIBLE_PRESSED             |
+|                  |                    |                                       |
+|                  |                    | `counter ≥ SYNC_DELAY`: R1            |
+|                  |                    |                                       |
+|                  |                    | R0_CHECK                              |
++------------------+--------------------+---------------------------------------+
+| R1_CHECK         | `incCount = 1`     | `|cols`: POSSIBLE_PRESSED             |
+|                  |                    |                                       |
+|                  |                    | `counter ≥ SYNC_DELAY`: R2            |
+|                  |                    |                                       |
+|                  |                    | R0_CHECK                              |
++------------------+--------------------+---------------------------------------+
+| R2_CHECK         | `incCount = 1`     | `|cols`: POSSIBLE_PRESSED             |
+|                  |                    |                                       |
+|                  |                    | `counter ≥ SYNC_DELAY`: R3            |
+|                  |                    |                                       |
+|                  |                    | R0_CHECK                              |
++------------------+--------------------+---------------------------------------+
+| R3_CHECK         | `incCount = 1`     | `|cols`: POSSIBLE_PRESSED             |
+|                  |                    |                                       |
+|                  |                    | `counter ≥ SYNC_DELAY`: R0            |
+|                  |                    |                                       |
+|                  |                    | R0_CHECK                              |
++------------------+--------------------+---------------------------------------+
+| POSSIBLE_PRESSED | `incCount = 1`     | `|cols & counter ≥ DEBOUNCE`: PRESSED |
+|                  |                    |                                       |
+|                  |                    | `counter ≥ DEBOUNCE`: IDLE            |
+|                  |                    |                                       |
+|                  |                    | POSSIBLE_PRESSED                      |
++------------------+--------------------+---------------------------------------+
+| PRESSED          | `newNum = 1`       | WAIT                                  |
++------------------+--------------------+---------------------------------------+
+| WAIT             | `incCount = 1`     | `~|cols & counter ≥ DELAY`: IDLE      |
+|                  |                    |                                       |
+|                  |                    | WAIT                                  |
++------------------+--------------------+---------------------------------------+
+
+: State Transition Table of `key_scan` fsm {#tbl-state-transition}
+
+
+
+### Schematic
+::: {#fig-schematic}
+![](images/schematic.png)
+
+Schematic of the physical circuit.
+:::
+
+@fig-schematic shows the physical layout of the design. Internal resistors are used as much as possible, so a pull-up configuration was chosen for the keypad.
+
+## Results and Discussion
+
+### Testbench Simulation
+
+::: {#fig-top-testbench}
+
+![](images/top-testbench.png)
+
+Top level simulation.
+:::
+
+::: {#fig-key-decode-testbench}
+
+![](images/key-decode-testbench.png)
+
+Detailed simulation of key decoder.
+:::
+
+@fig-top-testbench shows a screenshot of the QuestaSim simulations validating the overall Verilog. @fig-key-decode-testbench shows a more detailed simulation testing the key decoder module with all possible inputs. The physical design works when deployed on the FPGA. The design meets all intended design objectives and specifications.
+
+## Conclusion
+
+The design successfully displays two digits on the 7-segment display based on the characters that are input using the keypad. The numbers persist after the keys are released and cycle off to the left as new keys are pressed.
+
+I spent a total of 27 hours working on this lab.
