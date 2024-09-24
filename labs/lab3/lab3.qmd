@@ -136,16 +136,23 @@ Schematic of the physical circuit.
 
 ## Results and Discussion
 
-<!-- ### Testbench Simulation
+### Testbench Simulation
 
-::: {#fig-testbench}
+::: {#fig-top-testbench}
 
-![](images/testbench.png)
+![](images/top-testbench.png)
 
-A screenshot of a QuestaSim simulation.
-::: -->
+Top level simulation.
+:::
 
-@fig-testbench shows a screenshot of the QuestaSim simulations validating the Verilog. The physical design works when deployed on the FPGA. The design meets all intended design objectives and specifications.
+::: {#fig-key-decode-testbench}
+
+![](images/key-decode-testbench.png)
+
+Detailed simulation of key decoder.
+:::
+
+@fig-top-testbench shows a screenshot of the QuestaSim simulations validating the overall Verilog. @fig-key-decode-testbench shows a more detailed simulation testing the key decoder module with all possible inputs. The physical design works when deployed on the FPGA. The design meets all intended design objectives and specifications.
 
 ## Conclusion
 
