@@ -120,7 +120,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#work-in-progress" id="toc-work-in-progress" class="nav-link active" data-scroll-target="#work-in-progress">Work In Progress</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#design-and-testing-methodology" id="toc-design-and-testing-methodology" class="nav-link" data-scroll-target="#design-and-testing-methodology">Design and Testing Methodology</a></li>
+  <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation:</a>
+  <ul class="collapse">
+  <li><a href="#block-diagram" id="toc-block-diagram" class="nav-link" data-scroll-target="#block-diagram">Block Diagram</a></li>
+  <li><a href="#sec-fsm" id="toc-sec-fsm" class="nav-link" data-scroll-target="#sec-fsm">Finite-State Machine</a></li>
+  <li><a href="#schematic" id="toc-schematic" class="nav-link" data-scroll-target="#schematic">Schematic</a></li>
+  </ul></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a>
+  <ul class="collapse">
+  <li><a href="#testbench-simulation" id="toc-testbench-simulation" class="nav-link" data-scroll-target="#testbench-simulation">Testbench Simulation</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -146,8 +158,253 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="work-in-progress" class="level2">
-<h2 class="anchored" data-anchor-id="work-in-progress">Work In Progress</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this lab, a design was implemented on an FPGA to scan a 16-button keypad for input and display the input characters on a 2-digit seven-segment display. 2 characters are displayed at a time and they are retained until new characters are input. The system is resistant to switch bouncing and multiple button presses.</p>
+</section>
+<section id="design-and-testing-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="design-and-testing-methodology">Design and Testing Methodology</h2>
+<p>The overall project was split up into several smaller Verilog modules. See <a href="#tbl-modules" class="quarto-xref">Table&nbsp;1</a> for all of the modules. At a high level, the system was broken down into dedicated decoders for the keypad and 7-segment display, a controller FSM, and several counters. A synchronizer was also used to avoid metastability from the asynchronous inputs. Many of the modules from <a href="https://github.com/jordancarlin/e155-lab2">Lab 2</a> were used almost unchanged to drive the 7-segment display logic. The main design challenge came in the FSM, which also incorporated switch debouncing and the control logic to retain previous numbers. This is explained in more detail in the FSM section.</p>
+<p>The physical design was setup to ensure that the maximum current from the FPGA pins was not exceeded, which necessitated the use of transistors to drive the 7-segment displays. The keypad was setup to use pull-up resistors so that the internal FPGA resistors could be used.</p>
+<p>The Verilog modules were tested using several testbenches that applied testvectors covering a variety of different possible inputs. It did not seem necessary to test every possible input combination as that number quickly explodes. The physical design was tested using a wide range of different possible inputs.</p>
+</section>
+<section id="technical-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation:</h2>
+<p>The source code for the project can be found in the associated <a href="https://github.com/jordancarlin/e155-lab3">GitHub repository</a>.</p>
+<section id="block-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="block-diagram">Block Diagram</h3>
+<div id="fig-block-diagram" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-block-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/block-diagram.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-block-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Block diagram of the Verilog design.
+</figcaption>
+</figure>
+</div>
+<p>The block diagram in <a href="#fig-block-diagram" class="quarto-xref">Figure&nbsp;1</a> demonstrates the overall architecture of the design. The various modules are described here:</p>
+<div id="tbl-modules" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-modules-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Verilog Modules
+</figcaption>
+<div aria-describedby="tbl-modules-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">SystemVerilog Module</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>lab3_jc</code></td>
+<td style="text-align: center;">FPGA specific module, includes high speed oscillator module</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>top</code></td>
+<td style="text-align: center;">Top-level, non FPGA-specific module</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>sync</code></td>
+<td style="text-align: center;">Synchronizer with two flops</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>key_scan</code></td>
+<td style="text-align: center;">Main FSM module to drive keypad row scanning and updating of stored numbers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>counter</code></td>
+<td style="text-align: center;">Counter used to reduce the speed of the clock</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>key_decoder</code></td>
+<td style="text-align: center;">16-button keypad decoder</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>seg_decoder</code></td>
+<td style="text-align: center;">7-segment display decoder</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>pulse</code></td>
+<td style="text-align: center;">Rapidly switches which digit of the 7-segment display is active</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="sec-fsm" class="level3">
+<h3 class="anchored" data-anchor-id="sec-fsm">Finite-State Machine</h3>
+<p>The following state transition diagram and table explain the operation of the main <code>key_scan</code> fsm. In addition to the state and inputs, the FSM is also reliant on a counter to determine several of the state transitions. This counter is reset or incremented depending on the current state and is used to address the latency introduced by the synchronizer and avoid switch bouncing.</p>
+<p>For switch bouncing in particular, the POSSIBLE_PRESSED state only transitions to the PRESSED state if a button is held down for 15 continuous clock cycles. This will avoid counting any bouncing as a press. Once in the WAITING state (which happens after a button is pressed) the FSM does not resume scanning until after the button is released and a set period of time (300 clock cycles) has elapsed. This approach introduces some additional latency, but due ot the relatively high speed of the clock it is not enough to make a difference to the user so seems like an acceptable debouncing strategy.</p>
+<div id="fig-fsm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fsm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fsm.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fsm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: State transition diagram of <code>key_scan</code> fsm
+</figcaption>
+</figure>
+</div>
+<div id="tbl-state-transition" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-state-transition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: State Transition Table of <code>key_scan</code> fsm
+</figcaption>
+<div aria-describedby="tbl-state-transition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 25%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Current State</th>
+<th style="text-align: center;">Outputs</th>
+<th style="text-align: center;">Next State</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">IDLE</td>
+<td style="text-align: center;"><code>clearCounter = 1</code></td>
+<td style="text-align: center;">R0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">R0</td>
+<td style="text-align: center;"><p><code>clearCounter = 1</code></p>
+<p><code>rowChange = 1</code></p>
+<p><code>newRows = 0001</code></p></td>
+<td style="text-align: center;">R0_CHECK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">R1</td>
+<td style="text-align: center;"><p><code>clearCounter = 1</code></p>
+<p><code>rowChange = 1</code></p>
+<p><code>newRows = 0010</code></p></td>
+<td style="text-align: center;">R1_CHECK</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">R2</td>
+<td style="text-align: center;"><p><code>clearCounter = 1</code></p>
+<p><code>rowChange = 1</code></p>
+<p><code>newRows = 0100</code></p></td>
+<td style="text-align: center;">R2_CHECK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">R3</td>
+<td style="text-align: center;"><p><code>clearCounter = 1</code></p>
+<p><code>rowChange = 1</code></p>
+<p><code>newRows = 1000</code></p></td>
+<td style="text-align: center;">R3_CHECK</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">R0_CHECK</td>
+<td style="text-align: center;"><code>incCount = 1</code></td>
+<td style="text-align: center;"><p><code>|cols</code>: POSSIBLE_PRESSED</p>
+<p><code>counter ≥ SYNC_DELAY</code>: R1</p>
+<p>R0_CHECK</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">R1_CHECK</td>
+<td style="text-align: center;"><code>incCount = 1</code></td>
+<td style="text-align: center;"><p><code>|cols</code>: POSSIBLE_PRESSED</p>
+<p><code>counter ≥ SYNC_DELAY</code>: R2</p>
+<p>R0_CHECK</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">R2_CHECK</td>
+<td style="text-align: center;"><code>incCount = 1</code></td>
+<td style="text-align: center;"><p><code>|cols</code>: POSSIBLE_PRESSED</p>
+<p><code>counter ≥ SYNC_DELAY</code>: R3</p>
+<p>R0_CHECK</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">R3_CHECK</td>
+<td style="text-align: center;"><code>incCount = 1</code></td>
+<td style="text-align: center;"><p><code>|cols</code>: POSSIBLE_PRESSED</p>
+<p><code>counter ≥ SYNC_DELAY</code>: R0</p>
+<p>R0_CHECK</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">POSSIBLE_PRESSED</td>
+<td style="text-align: center;"><code>incCount = 1</code></td>
+<td style="text-align: center;"><p><code>|cols &amp; counter ≥ DEBOUNCE</code>: PRESSED</p>
+<p><code>counter ≥ DEBOUNCE</code>: IDLE</p>
+<p>POSSIBLE_PRESSED</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">PRESSED</td>
+<td style="text-align: center;"><code>newNum = 1</code></td>
+<td style="text-align: center;">WAIT</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">WAIT</td>
+<td style="text-align: center;"><code>incCount = 1</code></td>
+<td style="text-align: center;"><p><code>~|cols &amp; counter ≥ DELAY</code>: IDLE</p>
+<p>WAIT</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="schematic" class="level3">
+<h3 class="anchored" data-anchor-id="schematic">Schematic</h3>
+<div id="fig-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/schematic.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Schematic of the physical circuit.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-schematic" class="quarto-xref">Figure&nbsp;3</a> shows the physical layout of the design. Internal resistors are used as much as possible, so a pull-up configuration was chosen for the keypad.</p>
+</section>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
+<section id="testbench-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="testbench-simulation">Testbench Simulation</h3>
+<div id="fig-top-testbench" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-top-testbench-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/top-testbench.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-top-testbench-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Top level simulation.
+</figcaption>
+</figure>
+</div>
+<div id="fig-key-decode-testbench" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-key-decode-testbench-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/key-decode-testbench.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-key-decode-testbench-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Detailed simulation of key decoder.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-top-testbench" class="quarto-xref">Figure&nbsp;4</a> shows a screenshot of the QuestaSim simulations validating the overall Verilog. <a href="#fig-key-decode-testbench" class="quarto-xref">Figure&nbsp;5</a> shows a more detailed simulation testing the key decoder module with all possible inputs. The physical design works when deployed on the FPGA. The design meets all intended design objectives and specifications.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The design successfully displays two digits on the 7-segment display based on the characters that are input using the keypad. The numbers persist after the keys are released and cycle off to the left as new keys are pressed.</p>
+<p>I spent a total of 27 hours working on this lab.</p>
 
 
 </section>
