@@ -9,11 +9,11 @@ In this lab, a design was implemented on an FPGA to scan a 16-button keypad for 
 
 ## Design and Testing Methodology
 
-The overall project was split up into several smaller Verilog modules. See @tbl-modules for all of the modules. At a high level, the system was broken down into dedicated decoders for the keypad and 7-segment display, a controller FSM, and several counters. A synchronizer was also used to avoid metastability from the asynchronous inputs. Many of the modules from [Lab 2](https://github.com/jordancarlin/e155-lab2) were used almost unchanged to drive the 7-segment display logic.
+The overall project was split up into several smaller Verilog modules. See @tbl-modules for all of the modules. At a high level, the system was broken down into dedicated decoders for the keypad and 7-segment display, a controller FSM, and several counters. A synchronizer was also used to avoid metastability from the asynchronous inputs. Many of the modules from [Lab 2](https://github.com/jordancarlin/e155-lab2) were used almost unchanged to drive the 7-segment display logic. The main design challenge came in the FSM, which also incorporated switch debouncing and the control logic to retain previous numbers. This is explained in more detail in the FSM section.
 
-<!-- The physical design was setup to ensure that the maximum current from the FPGA pins was not exceeded, which necessitated the use of transistors to drive the 7-segment displays.
+The physical design was setup to ensure that the maximum current from the FPGA pins was not exceeded, which necessitated the use of transistors to drive the 7-segment displays. The keypad was setup to use pull-up resistors so that the internal FPGA resistors could be used.
 
-The Verilog modules were tested using a testbench that applied testvectors covering most corner cases (extremes in this case) along with several other random vectors. It did not seem necessary to test every possible input combination as that number quickly explodes. The physical design was tested using a wide variety of different possible inputs. -->
+The Verilog modules were tested using several testbenches that applied testvectors covering a variety of different possible inputs. It did not seem necessary to test every possible input combination as that number quickly explodes. The physical design was tested using a wide range of different possible inputs.
 
 ## Technical Documentation:
 
@@ -43,7 +43,7 @@ The various modules are described here:
 
 : Verilog Modules {#tbl-modules}
 
-### Finite-State Machine
+### Finite-State Machine {#sec-fsm}
 
 The following state transition diagram and table explain the operation of the main `key_scan` fsm. In addition to the state and inputs, the FSM is also reliant on a counter to determine several of the state transitions. This counter is reset or incremented depending on the current state and is used to address the latency introduced by the synchronizer and avoid switch bouncing.
 
@@ -132,12 +132,7 @@ State transition diagram of `key_scan` fsm
 Schematic of the physical circuit.
 :::
 
-@fig-schematic shows the physical layout of the design.
-
-<!-- - An internal 100 k$\Omega$ pullup resistor was used to ensure the input switches were not floating.
-- The transistors were connected to the FPGA through a 330 $\Omega$ current-limiting resistor to ensure that they didn't pull more than 8 mA, the maximum the FPGA I/O pins can supply (see table 4.13 of the FPGA [datasheet](https://hmc-e155.github.io/assets/doc/FPGA-DS-02008-2-0-iCE40-UltraPlus-Family-Data-Sheet.pdf)). Per their [datasheet](https://www.onsemi.com/pdf/datasheet/2n3906-d.pdf), the transistors have a voltage drop of 0.65 V, so 330 $\Omega$ works perfectly based on Ohm's Law.
-- The LEDs in the 7-segment display have a voltage drop of 2.1 V ([datasheet](https://www.alldatasheet.com/datasheet-pdf/view/118288/HP/HDSP-5721.html)), so a current-limiting resistor of 150 $\Omega$ limits the current through the FPGA to 8 mA.
-- The output LEDs for the sum have a voltage drop of 2.35 V ([datasheet](https://www.lumex.com/datasheet/SSA-LXB10HW-GF+LP)), so 120 $\Omega$ current-limiting resistors were selected. -->
+@fig-schematic shows the physical layout of the design. Internal resistors are used as much as possible, so a pull-up configuration was chosen for the keypad.
 
 ## Results and Discussion
 
@@ -148,12 +143,12 @@ Schematic of the physical circuit.
 ![](images/testbench.png)
 
 A screenshot of a QuestaSim simulation.
-:::
+::: -->
 
-@fig-testbench shows a screenshot of the QuestaSim simulation validating the Verilog. The physical design works when deployed on the FPGA. The design meets all intended design objectives and specifications. -->
+@fig-testbench shows a screenshot of the QuestaSim simulations validating the Verilog. The physical design works when deployed on the FPGA. The design meets all intended design objectives and specifications.
 
 ## Conclusion
 
-<!-- The design successfully displays two digits on the 7-segment display at the same time with only one set of pins by utilizing time-multiplexing. The LEDs show the correct sum for all input digits. -->
+The design successfully displays two digits on the 7-segment display based on the characters that are input using the keypad. The numbers persist after the keys are released and cycle off to the left as new keys are pressed.
 
 I spent a total of 27 hours working on this lab.
