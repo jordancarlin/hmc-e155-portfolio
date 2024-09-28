@@ -91,11 +91,18 @@
     "text": "Wow! What a week. I knew that the keypad scanner lab was a notoriously difficult one, but I still wasn’t expecting this! I went into it fairly confident. I quickly created a state transition diagram for an FSM that I thought would do what I needed, wrote some Verilog, and wired up my circuit. I was expecting there to be some bugs when I fired up the system for the first time, but I was expecting them to be fairly minor and for the debugging process to be fairly painless (like it had been for the other labs). How wrong I was. My initial attempt gave me nothing but zeroes on the display no matter what buttons I pushed. Even 20 hours down the road, I’m still seemingly pretty far from a working system. After changing my FSM, rewiring parts of my circuit, and hours of investigating with an oscilloscope, I have some numbers appearing correctly occasionally. That’s far from where I wanted to be at this point. Up until now in E85 and in MicroPs I’ve gotten lucky (and just been dealing with simpler systems) with my designs and have had to do fairly little debugging. This lab has been an eye-opening experience into just how wrong things can go and how hard it can be to nail down the little details and figure out exactly why something isn’t working. While I’ve spent far too long on this lab already, I’m enjoying the process and am learning a lot about troubleshooting. Looking forward to finally getting it working the way it should be!"
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "E155 Blog",
+    "objectID": "posts/week-2-blog.html",
+    "href": "posts/week-2-blog.html",
+    "title": "MicroPs Week 2 Reflections",
     "section": "",
-    "text": "MicroPs Week 3 Reflections\n\n\n\n\n\nThe Pain of the Keypad Scanner\n\n\n\n\n\nSep 20, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 2 Reflections\n\n\n\n\n\nThe return of Verilog\n\n\n\n\n\nSep 13, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 1 Reflections\n\n\n\n\n\nWow! That’s a lot of soldering!\n\n\n\n\n\nSep 6, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nInitial Learning Goals\n\n\n\n\n\nWhat I want to get out of MicroPs\n\n\n\n\n\nAug 30, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\nNo matching items"
+    "text": "Hard to believe that we’re already over a quarter of the way done with the labs for MicroPs. I had a lot more fun with this lab than the previous one because it gave me a chance to dive into more digital design and (mostly) move on from fighting with tools (I still can’st seem to program the FPGA from my computer). While the seven-segment display decoder was fairly simple and basically just reused my module from last week, the pulse module that allowed for two digits to be driven using time-multiplexing was a bit more of a challenge. While the final logic ended up being fairly elegant, it took a while to think through some of the edge cases and picking an appropriate frequency to switch between the digits also took some trial and error.\nI had an interesting bug that caused one of my digits to occasionally be off by one from the input number, and it seemed to be happening inconsistently. The variability of it and the fact that my design worked in simulation led me to believe it was a hardware problem, and after a lot of very meticulous debugging with a much slower switching frequency. I traced it down to one of my input pins not working consistently. After switching to a different pin everything worked correctly, but I still need to investigate what the problem with the other pin was. I’m assuming a soldering issue. I will likely need to figure this out for next week or I suspect I will run out of pins. Looking forward to a much more complicated design project for the next lab."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "E155 Portfolio",
+    "section": "",
+    "text": "Jordan Carlin is a junior engineering major at Harvey Mudd College interested in computer engineering and digital design. He is currently doing research as a Clay-Wolkin Fellow at Harvey Mudd’s VLSI lab working on a superscalar implementation of the open-source OpenHW-Group CVW RISC-V SoC. He has experience with SystemVerilog and RISC-V assembly and would love to continue growing his computer engineering skills. He’s always excited to learn new things and would be happy to connect with you!"
   },
   {
     "objectID": "labs.html#lab-2-multiplexed-7-segment-display",
@@ -140,18 +147,18 @@
     "text": "Lab 7: The Advanced Encryption Standard (AES)"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "E155 Portfolio",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "E155 Blog",
     "section": "",
-    "text": "Jordan Carlin is a junior engineering major at Harvey Mudd College interested in computer engineering and digital design. He is currently doing research as a Clay-Wolkin Fellow at Harvey Mudd’s VLSI lab working on a superscalar implementation of the open-source OpenHW-Group CVW RISC-V SoC. He has experience with SystemVerilog and RISC-V assembly and would love to continue growing his computer engineering skills. He’s always excited to learn new things and would be happy to connect with you!"
+    "text": "MicroPs Week 4 Reflections\n\n\n\n\n\nVictory! And Lots of FSMs…\n\n\n\n\n\nSep 27, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 3 Reflections\n\n\n\n\n\nThe Pain of the Keypad Scanner\n\n\n\n\n\nSep 20, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 2 Reflections\n\n\n\n\n\nThe return of Verilog\n\n\n\n\n\nSep 13, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 1 Reflections\n\n\n\n\n\nWow! That’s a lot of soldering!\n\n\n\n\n\nSep 6, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nInitial Learning Goals\n\n\n\n\n\nWhat I want to get out of MicroPs\n\n\n\n\n\nAug 30, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/week-2-blog.html",
-    "href": "posts/week-2-blog.html",
-    "title": "MicroPs Week 2 Reflections",
+    "objectID": "posts/week-4-blog.html",
+    "href": "posts/week-4-blog.html",
+    "title": "MicroPs Week 4 Reflections",
     "section": "",
-    "text": "Hard to believe that we’re already over a quarter of the way done with the labs for MicroPs. I had a lot more fun with this lab than the previous one because it gave me a chance to dive into more digital design and (mostly) move on from fighting with tools (I still can’st seem to program the FPGA from my computer). While the seven-segment display decoder was fairly simple and basically just reused my module from last week, the pulse module that allowed for two digits to be driven using time-multiplexing was a bit more of a challenge. While the final logic ended up being fairly elegant, it took a while to think through some of the edge cases and picking an appropriate frequency to switch between the digits also took some trial and error.\nI had an interesting bug that caused one of my digits to occasionally be off by one from the input number, and it seemed to be happening inconsistently. The variability of it and the fact that my design worked in simulation led me to believe it was a hardware problem, and after a lot of very meticulous debugging with a much slower switching frequency. I traced it down to one of my input pins not working consistently. After switching to a different pin everything worked correctly, but I still need to investigate what the problem with the other pin was. I’m assuming a soldering issue. I will likely need to figure this out for next week or I suspect I will run out of pins. Looking forward to a much more complicated design project for the next lab."
+    "text": "It may have taken some extra time, but I finally got my keypad scanner working this week! Turns out methodical debugging really does work. After hooking my circuit up to a logic analyzer to see all of the rows and columns simultaneously (previously I was looking at just two of the eight signals at a time on the oscilloscope), the problem quickly became apparent. Due to a flaw in my FSM, whenever a button was pushed it looked at the next row to which key was being pressed. I solved this by adding in an extra cycle of latency (and later several more cycles of latency to account for the synchronizer) between the scanning states.\nIt had been a while since I’d thought deeply about FSMs, but coincidentally E85 has been doing FSMs for their labs the last two weeks as well. As a TBP tutor for E85, it was interesting to see the FSMs that they were coming up with and struggling to get working in parallel with my own FSM. While this FSM is much more complicated than the ones they are working on, the ideas and issues are very similar. Several of them were missing states that they needed or had thought about some of their transitions incorrectly, just like I had. In a lot of ways helping all of them debug their FSMs helped me think through debugging my own FSM. It’s always been said that teaching others makes your own understanding of a concept that much stronger, and it really is true."
   },
   {
     "objectID": "posts/learning-goals.html",
