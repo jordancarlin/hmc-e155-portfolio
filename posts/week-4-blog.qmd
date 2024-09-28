@@ -1,0 +1,13 @@
+---
+title: "MicroPs Week 4 Reflections"
+description: "Victory! And Lots of FSMs..."
+author: "Jordan Carlin"
+date: "9/27/24"
+categories:
+  - reflection
+draft: false
+---
+
+It may have taken some extra time, but I finally got my [keypad scanner](../labs/lab3/lab3.qmd) working this week! Turns out methodical debugging really does work. After hooking my circuit up to a logic analyzer to see all of the rows and columns simultaneously (previously I was looking at just two of the eight signals at a time on the oscilloscope), the problem quickly became apparent. Due to a flaw in my FSM, whenever a button was pushed it looked at the next row to which key was being pressed. I solved this by adding in an extra cycle of latency (and later several more cycles of latency to account for the synchronizer) between the scanning states.
+
+It had been a while since I'd thought deeply about FSMs, but coincidentally E85 has been doing FSMs for their labs the last two weeks as well. As a TBP tutor for E85, it was interesting to see the FSMs that they were coming up with and struggling to get working in parallel with my own FSM. While this FSM is much more complicated than the ones they are working on, the ideas and issues are very similar. Several of them were missing states that they needed or had thought about some of their transitions incorrectly, just like I had. In a lot of ways helping all of them debug their FSMs helped me think through debugging my own FSM. It's always been said that teaching others makes your own understanding of a concept that much stronger, and it really is true.
