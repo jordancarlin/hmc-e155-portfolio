@@ -77,32 +77,32 @@
     "text": "Conclusion\nThe design successfully displays two digits on the 7-segment display at the same time with only one set of pins by utilizing time-multiplexing. The LEDs show the correct sum for all input digits.\nI spent a total of 13 hours working on this lab."
   },
   {
-    "objectID": "posts/week-1-blog.html",
-    "href": "posts/week-1-blog.html",
-    "title": "MicroPs Week 1 Reflections",
+    "objectID": "posts/week-5-blog.html",
+    "href": "posts/week-5-blog.html",
+    "title": "MicroPs Week 5 Reflections",
     "section": "",
-    "text": "Wow! Lab 1 is in the books. For a lab that seemed so simple, it sure took a while (18 hours!). With this lab, the difficulty was mostly in all of the setup. I’ve soldered plenty before, but never anything like this! All of the tiny SMT components were crazy (it felt like I needed a magnifying glass!) and there were enough through-hole components to drive anyone crazy. Right when I thought I was done with all the preparation, I ran into roadblock after roadblock getting all the software setup and ready to go. From magical cables (my cable didn’t work to flash the J-Link firmware onto my MCU but after using another cable to flash it mine worked fine for programming) to crazy synthesis (Radiant will synthesize on my Linux partition but won’t program the FPGA) to utterly nonsensical Questa issues (It only works if I manually create the work library, launch it using one of the Questa buttons in Lattice, close it, and relaunch it using the other button), there were lots of speed-bumps getting everything ready to go. Now that it is all (mostly) working though, I’m excited to get going on the future labs that will let me focus more on the actual design. Looking forward to getting into some more complicated Verilog projects with lab 2!"
+    "text": "I’ve had very little experience designing PCBs, so this was interesting week for me. I was involved in some of the initial design discussions and schematic creation for a signal board for MuddSub (Harvey Mudd’s RoboSub team), but never got to far into that process. While I understand the point of a PCB and the general idea behind how they are designed, I’d never created one entirely myself before. While the overall process was definitely interesting, I’m surprised by how manual the whole process still is (it is possible this is a result of using KiCAD instead of something like Altium).\nThe built in libraries of parts make creating a schematic fairly straightforward, but the routing itself was a real pain. The “rat’s nest” makes it easier so that it is at least clear what needs to be connected, but it really seems like there would be a way for it to automatically do the routing and figure out an optimal layout (that could then be fine tuned if needed). While the manual process is kind of fun, it’s also very tedious and got old quickly.\nOverall, this was interesting experience and I’m excited to see if my board works. I wouldn’t be surprised if there were some problems with it since it is my first one, but it would be great to use a board that I designed for one of the labs."
   },
   {
-    "objectID": "posts/week-3-blog.html",
-    "href": "posts/week-3-blog.html",
-    "title": "MicroPs Week 3 Reflections",
+    "objectID": "posts/learning-goals.html",
+    "href": "posts/learning-goals.html",
+    "title": "Initial Learning Goals",
     "section": "",
-    "text": "Wow! What a week. I knew that the keypad scanner lab was a notoriously difficult one, but I still wasn’t expecting this! I went into it fairly confident. I quickly created a state transition diagram for an FSM that I thought would do what I needed, wrote some Verilog, and wired up my circuit. I was expecting there to be some bugs when I fired up the system for the first time, but I was expecting them to be fairly minor and for the debugging process to be fairly painless (like it had been for the other labs). How wrong I was. My initial attempt gave me nothing but zeroes on the display no matter what buttons I pushed. Even 20 hours down the road, I’m still seemingly pretty far from a working system. After changing my FSM, rewiring parts of my circuit, and hours of investigating with an oscilloscope, I have some numbers appearing correctly occasionally. That’s far from where I wanted to be at this point. Up until now in E85 and in MicroPs I’ve gotten lucky (and just been dealing with simpler systems) with my designs and have had to do fairly little debugging. This lab has been an eye-opening experience into just how wrong things can go and how hard it can be to nail down the little details and figure out exactly why something isn’t working. While I’ve spent far too long on this lab already, I’m enjoying the process and am learning a lot about troubleshooting. Looking forward to finally getting it working the way it should be!"
+    "text": "I’m very excited to begin my journey into the world of microprocessors and embedded systems in this class. While I have some experience with FPGAs from my internship with Masimo this past summer, they’re still relatively new to me and I’m looking forward to learning more about the ins and outs of how to use them. I’m also interested in learning more about when to use an FPGA vs MCU and how to program an ARM MCU (most of my experience so far is with RISC-V)."
   },
   {
-    "objectID": "posts/week-2-blog.html",
-    "href": "posts/week-2-blog.html",
-    "title": "MicroPs Week 2 Reflections",
+    "objectID": "posts/week-4-blog.html",
+    "href": "posts/week-4-blog.html",
+    "title": "MicroPs Week 4 Reflections",
     "section": "",
-    "text": "Hard to believe that we’re already over a quarter of the way done with the labs for MicroPs. I had a lot more fun with this lab than the previous one because it gave me a chance to dive into more digital design and (mostly) move on from fighting with tools (I still can’st seem to program the FPGA from my computer). While the seven-segment display decoder was fairly simple and basically just reused my module from last week, the pulse module that allowed for two digits to be driven using time-multiplexing was a bit more of a challenge. While the final logic ended up being fairly elegant, it took a while to think through some of the edge cases and picking an appropriate frequency to switch between the digits also took some trial and error.\nI had an interesting bug that caused one of my digits to occasionally be off by one from the input number, and it seemed to be happening inconsistently. The variability of it and the fact that my design worked in simulation led me to believe it was a hardware problem, and after a lot of very meticulous debugging with a much slower switching frequency. I traced it down to one of my input pins not working consistently. After switching to a different pin everything worked correctly, but I still need to investigate what the problem with the other pin was. I’m assuming a soldering issue. I will likely need to figure this out for next week or I suspect I will run out of pins. Looking forward to a much more complicated design project for the next lab."
+    "text": "It may have taken some extra time, but I finally got my keypad scanner working this week! Turns out methodical debugging really does work. After hooking my circuit up to a logic analyzer to see all of the rows and columns simultaneously (previously I was looking at just two of the eight signals at a time on the oscilloscope), the problem quickly became apparent. Due to a flaw in my FSM, whenever a button was pushed it looked at the next row to which key was being pressed. I solved this by adding in an extra cycle of latency (and later several more cycles of latency to account for the synchronizer) between the scanning states.\nIt had been a while since I’d thought deeply about FSMs, but coincidentally E85 has been doing FSMs for their labs the last two weeks as well. As a TBP tutor for E85, it was interesting to see the FSMs that they were coming up with and struggling to get working in parallel with my own FSM. While this FSM is much more complicated than the ones they are working on, the ideas and issues are very similar. Several of them were missing states that they needed or had thought about some of their transitions incorrectly, just like I had. In a lot of ways helping all of them debug their FSMs helped me think through debugging my own FSM. It’s always been said that teaching others makes your own understanding of a concept that much stronger, and it really is true."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "E155 Portfolio",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "E155 Blog",
     "section": "",
-    "text": "Jordan Carlin is a junior engineering major at Harvey Mudd College interested in computer engineering and digital design. He is currently doing research as a Clay-Wolkin Fellow at Harvey Mudd’s VLSI lab working on a superscalar implementation of the open-source OpenHW-Group CVW RISC-V SoC. He has experience with SystemVerilog and RISC-V assembly and would love to continue growing his computer engineering skills. He’s always excited to learn new things and would be happy to connect with you!"
+    "text": "MicroPs Week 5 Reflections\n\n\n\n\n\nPCBs?\n\n\n\n\n\nOct 4, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 4 Reflections\n\n\n\n\n\nVictory! And Lots of FSMs…\n\n\n\n\n\nSep 27, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 3 Reflections\n\n\n\n\n\nThe Pain of the Keypad Scanner\n\n\n\n\n\nSep 20, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 2 Reflections\n\n\n\n\n\nThe return of Verilog\n\n\n\n\n\nSep 13, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 1 Reflections\n\n\n\n\n\nWow! That’s a lot of soldering!\n\n\n\n\n\nSep 6, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nInitial Learning Goals\n\n\n\n\n\nWhat I want to get out of MicroPs\n\n\n\n\n\nAug 30, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "labs.html#lab-2-multiplexed-7-segment-display",
@@ -147,25 +147,32 @@
     "text": "Lab 7: The Advanced Encryption Standard (AES)"
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "E155 Blog",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "E155 Portfolio",
     "section": "",
-    "text": "MicroPs Week 4 Reflections\n\n\n\n\n\nVictory! And Lots of FSMs…\n\n\n\n\n\nSep 27, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 3 Reflections\n\n\n\n\n\nThe Pain of the Keypad Scanner\n\n\n\n\n\nSep 20, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 2 Reflections\n\n\n\n\n\nThe return of Verilog\n\n\n\n\n\nSep 13, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nMicroPs Week 1 Reflections\n\n\n\n\n\nWow! That’s a lot of soldering!\n\n\n\n\n\nSep 6, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\n\n\n\n\n\n\nInitial Learning Goals\n\n\n\n\n\nWhat I want to get out of MicroPs\n\n\n\n\n\nAug 30, 2024\n\n\nJordan Carlin\n\n\n\n\n\n\nNo matching items"
+    "text": "Jordan Carlin is a junior engineering major at Harvey Mudd College interested in computer engineering and digital design. He is currently doing research as a Clay-Wolkin Fellow at Harvey Mudd’s VLSI lab working on a superscalar implementation of the open-source OpenHW-Group CVW RISC-V SoC. He has experience with SystemVerilog and RISC-V assembly and would love to continue growing his computer engineering skills. He’s always excited to learn new things and would be happy to connect with you!"
   },
   {
-    "objectID": "posts/week-4-blog.html",
-    "href": "posts/week-4-blog.html",
-    "title": "MicroPs Week 4 Reflections",
+    "objectID": "posts/week-2-blog.html",
+    "href": "posts/week-2-blog.html",
+    "title": "MicroPs Week 2 Reflections",
     "section": "",
-    "text": "It may have taken some extra time, but I finally got my keypad scanner working this week! Turns out methodical debugging really does work. After hooking my circuit up to a logic analyzer to see all of the rows and columns simultaneously (previously I was looking at just two of the eight signals at a time on the oscilloscope), the problem quickly became apparent. Due to a flaw in my FSM, whenever a button was pushed it looked at the next row to which key was being pressed. I solved this by adding in an extra cycle of latency (and later several more cycles of latency to account for the synchronizer) between the scanning states.\nIt had been a while since I’d thought deeply about FSMs, but coincidentally E85 has been doing FSMs for their labs the last two weeks as well. As a TBP tutor for E85, it was interesting to see the FSMs that they were coming up with and struggling to get working in parallel with my own FSM. While this FSM is much more complicated than the ones they are working on, the ideas and issues are very similar. Several of them were missing states that they needed or had thought about some of their transitions incorrectly, just like I had. In a lot of ways helping all of them debug their FSMs helped me think through debugging my own FSM. It’s always been said that teaching others makes your own understanding of a concept that much stronger, and it really is true."
+    "text": "Hard to believe that we’re already over a quarter of the way done with the labs for MicroPs. I had a lot more fun with this lab than the previous one because it gave me a chance to dive into more digital design and (mostly) move on from fighting with tools (I still can’st seem to program the FPGA from my computer). While the seven-segment display decoder was fairly simple and basically just reused my module from last week, the pulse module that allowed for two digits to be driven using time-multiplexing was a bit more of a challenge. While the final logic ended up being fairly elegant, it took a while to think through some of the edge cases and picking an appropriate frequency to switch between the digits also took some trial and error.\nI had an interesting bug that caused one of my digits to occasionally be off by one from the input number, and it seemed to be happening inconsistently. The variability of it and the fact that my design worked in simulation led me to believe it was a hardware problem, and after a lot of very meticulous debugging with a much slower switching frequency. I traced it down to one of my input pins not working consistently. After switching to a different pin everything worked correctly, but I still need to investigate what the problem with the other pin was. I’m assuming a soldering issue. I will likely need to figure this out for next week or I suspect I will run out of pins. Looking forward to a much more complicated design project for the next lab."
   },
   {
-    "objectID": "posts/learning-goals.html",
-    "href": "posts/learning-goals.html",
-    "title": "Initial Learning Goals",
+    "objectID": "posts/week-3-blog.html",
+    "href": "posts/week-3-blog.html",
+    "title": "MicroPs Week 3 Reflections",
     "section": "",
-    "text": "I’m very excited to begin my journey into the world of microprocessors and embedded systems in this class. While I have some experience with FPGAs from my internship with Masimo this past summer, they’re still relatively new to me and I’m looking forward to learning more about the ins and outs of how to use them. I’m also interested in learning more about when to use an FPGA vs MCU and how to program an ARM MCU (most of my experience so far is with RISC-V)."
+    "text": "Wow! What a week. I knew that the keypad scanner lab was a notoriously difficult one, but I still wasn’t expecting this! I went into it fairly confident. I quickly created a state transition diagram for an FSM that I thought would do what I needed, wrote some Verilog, and wired up my circuit. I was expecting there to be some bugs when I fired up the system for the first time, but I was expecting them to be fairly minor and for the debugging process to be fairly painless (like it had been for the other labs). How wrong I was. My initial attempt gave me nothing but zeroes on the display no matter what buttons I pushed. Even 20 hours down the road, I’m still seemingly pretty far from a working system. After changing my FSM, rewiring parts of my circuit, and hours of investigating with an oscilloscope, I have some numbers appearing correctly occasionally. That’s far from where I wanted to be at this point. Up until now in E85 and in MicroPs I’ve gotten lucky (and just been dealing with simpler systems) with my designs and have had to do fairly little debugging. This lab has been an eye-opening experience into just how wrong things can go and how hard it can be to nail down the little details and figure out exactly why something isn’t working. While I’ve spent far too long on this lab already, I’m enjoying the process and am learning a lot about troubleshooting. Looking forward to finally getting it working the way it should be!"
+  },
+  {
+    "objectID": "posts/week-1-blog.html",
+    "href": "posts/week-1-blog.html",
+    "title": "MicroPs Week 1 Reflections",
+    "section": "",
+    "text": "Wow! Lab 1 is in the books. For a lab that seemed so simple, it sure took a while (18 hours!). With this lab, the difficulty was mostly in all of the setup. I’ve soldered plenty before, but never anything like this! All of the tiny SMT components were crazy (it felt like I needed a magnifying glass!) and there were enough through-hole components to drive anyone crazy. Right when I thought I was done with all the preparation, I ran into roadblock after roadblock getting all the software setup and ready to go. From magical cables (my cable didn’t work to flash the J-Link firmware onto my MCU but after using another cable to flash it mine worked fine for programming) to crazy synthesis (Radiant will synthesize on my Linux partition but won’t program the FPGA) to utterly nonsensical Questa issues (It only works if I manually create the work library, launch it using one of the Questa buttons in Lattice, close it, and relaunch it using the other button), there were lots of speed-bumps getting everything ready to go. Now that it is all (mostly) working though, I’m excited to get going on the future labs that will let me focus more on the actual design. Looking forward to getting into some more complicated Verilog projects with lab 2!"
   },
   {
     "objectID": "resources.html",
