@@ -1,0 +1,15 @@
+---
+title: "MicroPs Week 5 Reflections"
+description: "PCBs?"
+author: "Jordan Carlin"
+date: "10/4/24"
+categories:
+  - reflection
+draft: false
+---
+
+I've had very little experience designing PCBs, so this was interesting week for me. I was involved in some of the initial design discussions and schematic creation for a signal board for MuddSub (Harvey Mudd's RoboSub team), but never got to far into that process. While I understand the point of a PCB and the general idea behind how they are designed, I'd never created one entirely myself before. While the overall process was definitely interesting, I'm surprised by how manual the whole process still is (it is possible this is a result of using KiCAD instead of something like Altium).
+
+The built in libraries of parts make creating a schematic fairly straightforward, but the routing itself was a real pain. The "rat's nest" makes it easier so that it is at least clear what needs to be connected, but it really seems like there would be a way for it to automatically do the routing and figure out an optimal layout (that could then be fine tuned if needed). While the manual process is kind of fun, it's also very tedious and got old quickly.
+
+Overall, this was interesting experience and I'm excited to see if my board works. I wouldn't be surprised if there were some problems with it since it is my first one, but it would be great to use a board that I designed for one of the labs.
