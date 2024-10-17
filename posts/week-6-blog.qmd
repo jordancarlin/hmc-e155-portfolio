@@ -1,0 +1,15 @@
+---
+title: "MicroPs Week 6 Reflections"
+description: "Final Project Kickoff?? Already?!"
+author: "Jordan Carlin"
+date: "10/16/24"
+categories:
+  - reflection
+draft: false
+---
+
+Hard to believe that it is already time to get started with the final projects for this class. This is the part of the class that I think is by far the most well known and probably the most fun, but also the most work. Part of what makes it fun is getting to decide what it is that you're creating. That's the subject of this blog post.
+
+I'm going to be working with Zoe for the final project, and we both quickly agreed that we wanted to do a project involving a display. The question was what. We threw around lots of different ideas, from something that was drawing out representations of interesting mathematical concepts to a maze that people had to solve, before finally settling on something more creative in nature. We're going to create a better version of an etch-a-sketch with lots of new bells and whistles. In addition to drawing based on how you control a joystick (replacing the traditional 2 knobs), our system will allow you to select the color and brush width and even lift the pen up. It will almost be like those Python turtle graphics programs for learning to code, except instead of Python code controlling where the pen goes it will be a person interfacing with the system.
+
+I'm excited to dive back into the FPGA in earnest for this project. Figuring out when to redraw part of the screen based on input from the MCU (probably an FSM) will be an interesting challenge, but what I'm envisioning taking up most of my time is getting the VGA display output working. VGA is a much more complicated protocol than I have worked with before and has strict requirements to get the correct image displaying. It will be interesting to figure out how to do this in an effective way on the FPGA. Looking forward to the challenge and learning lots more about unique digital designs!
