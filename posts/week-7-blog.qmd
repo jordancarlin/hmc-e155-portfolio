@@ -1,0 +1,17 @@
+---
+title: "MicroPs Week 7 Reflections"
+description: "Labs Labs Labs"
+author: "Jordan Carlin"
+date: "10/18/24"
+categories:
+  - reflection
+draft: false
+---
+
+It's catchup week! Due to a variety of other things going on, I've fallen pretty far behind on the labs the last few weeks. This past week along with the next few days are all about getting back on top of things and getting caught up on the labs. My reflections won't be as in depth on each individual lab since there are multiple to cover, but I'm looking forward to being up to date with the labs again.
+
+Let's start with Lab 4,  the music lab. This was the first lab that involved the MCU. It's been a while since I've done much C embedded C programming, so it took me a little while to get back into the swing of things. There were also a lot of small nuances to the timers that tripped me up. One particularly interesting one was when notes would stop playing in the middle of my song. It would randomly skip a few notes before starting up again. This baffled me for quite a while, until I discovered that it was because I was setting bits in the register that controls the duty cycle, but not clearing them first. Once I switched from orring the bits with my new desired value to directly overwriting it with an equals sign, everything started working. It really goes to show that the tiniest of details can make a world of difference on projects like these.
+
+On the labs 5 and 6 front, I'm in the process of finishing up lab 5 right now. While I am familiar with the concept of interrupts (and even their implementation inside a RISC-V processor), I had never actually used them in a program that I wrote before. It was interesting and insightful to actually use them for a change. I'm looking forward to getting it fully working and detecting the motor speed. I'm hoping to get started on Lab 6 in the next day or two, which should be quite useful because we plan to use SPI to communicate between the MCU and FPGA for our final project.
+
+As as final thought for this week, I'm looking forward to the North American RISC-V Summit next week. While MicroPs does not do anything RISC-V based, it is still closely connected to computer architecture and digital design so ties nicely into this class. I'll be attending with Prof. Harris's research lab (the Clay Wolkin Fellowship) and am excited to meet many of the people I've heard about or spoken to online in person.
