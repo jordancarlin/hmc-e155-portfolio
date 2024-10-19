@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jordan Carlin">
+<meta name="dcterms.date" content="2024-10-18">
+<meta name="description" content="Labs Labs Labs">
 
-<title>E155 Blog – E155 Portfolio</title>
+<title>MicroPs Week 7 Reflections – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +69,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +81,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">E155 Portfolio</span>
     </a>
   </div>
@@ -149,19 +92,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./labs.html"> 
+    <a class="nav-link" href="../labs.html"> 
 <span class="menu-text">Labs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resources.html"> 
+    <a class="nav-link" href="../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
@@ -183,14 +126,34 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">E155 Blog</h1>
-</div>
+<h1 class="title">MicroPs Week 7 Reflections</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">reflection</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Labs Labs Labs
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jordan Carlin </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 18, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -200,241 +163,14 @@ window.Quarto = {
 </header>
 
 
+<p>It’s catchup week! Due to a variety of other things going on, I’ve fallen pretty far behind on the labs the last few weeks. This past week along with the next few days are all about getting back on top of things and getting caught up on the labs. My reflections won’t be as in depth on each individual lab since there are multiple to cover, but I’m looking forward to being up to date with the labs again.</p>
+<p>Let’s start with Lab 4, the music lab. This was the first lab that involved the MCU. It’s been a while since I’ve done much C embedded C programming, so it took me a little while to get back into the swing of things. There were also a lot of small nuances to the timers that tripped me up. One particularly interesting one was when notes would stop playing in the middle of my song. It would randomly skip a few notes before starting up again. This baffled me for quite a while, until I discovered that it was because I was setting bits in the register that controls the duty cycle, but not clearing them first. Once I switched from orring the bits with my new desired value to directly overwriting it with an equals sign, everything started working. It really goes to show that the tiniest of details can make a world of difference on projects like these.</p>
+<p>On the labs 5 and 6 front, I’m in the process of finishing up lab 5 right now. While I am familiar with the concept of interrupts (and even their implementation inside a RISC-V processor), I had never actually used them in a program that I wrote before. It was interesting and insightful to actually use them for a change. I’m looking forward to getting it fully working and detecting the motor speed. I’m hoping to get started on Lab 6 in the next day or two, which should be quite useful because we plan to use SPI to communicate between the MCU and FPGA for our final project.</p>
+<p>As as final thought for this week, I’m looking forward to the North American RISC-V Summit next week. While MicroPs does not do anything RISC-V based, it is still closely connected to computer architecture and digital design so ties nicely into this class. I’ll be attending with Prof.&nbsp;Harris’s research lab (the Clay Wolkin Fellowship) and am excited to meet many of the people I’ve heard about or spoken to online in person.</p>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="reflection" data-listing-date-sort="1729209600000" data-listing-file-modified-sort="1729315052657" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="419">
-<div class="thumbnail">
-<p><a href="./posts/week-7-blog.html" class="no-external"></a></p><a href="./posts/week-7-blog.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-7-blog.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-7-blog.html" class="no-external">MicroPs Week 7 Reflections</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-7-blog.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-7-blog.html" class="no-external">Labs Labs Labs</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-7-blog.html" class="no-external">
-<div class="listing-date">
-Oct 18, 2024
-</div>
-<div class="listing-author">
-Jordan Carlin
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="reflection" data-listing-date-sort="1729036800000" data-listing-file-modified-sort="1729315052653" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="322">
-<div class="thumbnail">
-<p><a href="./posts/week-6-blog.html" class="no-external"></a></p><a href="./posts/week-6-blog.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-6-blog.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-6-blog.html" class="no-external">MicroPs Week 6 Reflections</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-6-blog.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-6-blog.html" class="no-external">Final Project Kickoff?? Already?!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-6-blog.html" class="no-external">
-<div class="listing-date">
-Oct 16, 2024
-</div>
-<div class="listing-author">
-Jordan Carlin
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="reflection" data-listing-date-sort="1728000000000" data-listing-file-modified-sort="1729315052653" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="232">
-<div class="thumbnail">
-<p><a href="./posts/week-5-blog.html" class="no-external"></a></p><a href="./posts/week-5-blog.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-5-blog.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-5-blog.html" class="no-external">MicroPs Week 5 Reflections</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-5-blog.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-5-blog.html" class="no-external">PCBs?</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-5-blog.html" class="no-external">
-<div class="listing-date">
-Oct 4, 2024
-</div>
-<div class="listing-author">
-Jordan Carlin
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="reflection" data-listing-date-sort="1727395200000" data-listing-file-modified-sort="1729315052653" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="256">
-<div class="thumbnail">
-<p><a href="./posts/week-4-blog.html" class="no-external"></a></p><a href="./posts/week-4-blog.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-4-blog.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-4-blog.html" class="no-external">MicroPs Week 4 Reflections</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-4-blog.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-4-blog.html" class="no-external">Victory! And Lots of FSMs…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-4-blog.html" class="no-external">
-<div class="listing-date">
-Sep 27, 2024
-</div>
-<div class="listing-author">
-Jordan Carlin
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="reflection" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1729315052653" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="264">
-<div class="thumbnail">
-<p><a href="./posts/week-3-blog.html" class="no-external"></a></p><a href="./posts/week-3-blog.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-3-blog.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-3-blog.html" class="no-external">MicroPs Week 3 Reflections</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-3-blog.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-3-blog.html" class="no-external">The Pain of the Keypad Scanner</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-3-blog.html" class="no-external">
-<div class="listing-date">
-Sep 20, 2024
-</div>
-<div class="listing-author">
-Jordan Carlin
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="reflection" data-listing-date-sort="1726185600000" data-listing-file-modified-sort="1729315052653" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="273">
-<div class="thumbnail">
-<p><a href="./posts/week-2-blog.html" class="no-external"></a></p><a href="./posts/week-2-blog.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-2-blog.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-2-blog.html" class="no-external">MicroPs Week 2 Reflections</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-2-blog.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-2-blog.html" class="no-external">The return of Verilog</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-2-blog.html" class="no-external">
-<div class="listing-date">
-Sep 13, 2024
-</div>
-<div class="listing-author">
-Jordan Carlin
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="reflection" data-listing-date-sort="1725580800000" data-listing-file-modified-sort="1729315052653" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="221">
-<div class="thumbnail">
-<p><a href="./posts/week-1-blog.html" class="no-external"></a></p><a href="./posts/week-1-blog.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/week-1-blog.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/week-1-blog.html" class="no-external">MicroPs Week 1 Reflections</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/week-1-blog.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/week-1-blog.html" class="no-external">Wow! That’s a lot of soldering!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/week-1-blog.html" class="no-external">
-<div class="listing-date">
-Sep 6, 2024
-</div>
-<div class="listing-author">
-Jordan Carlin
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="reflection" data-listing-date-sort="1724976000000" data-listing-file-modified-sort="1729315052653" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="86">
-<div class="thumbnail">
-<p><a href="./posts/learning-goals.html" class="no-external"></a></p><a href="./posts/learning-goals.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/learning-goals.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/learning-goals.html" class="no-external">Initial Learning Goals</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/learning-goals.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/learning-goals.html" class="no-external">What I want to get out of MicroPs</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/learning-goals.html" class="no-external">
-<div class="listing-date">
-Aug 30, 2024
-</div>
-<div class="listing-author">
-Jordan Carlin
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
