@@ -1,0 +1,15 @@
+---
+title: "MicroPs Week 8 Reflections"
+description: "RISC-V Everywhere"
+author: "Jordan Carlin"
+date: "10/25/24"
+categories:
+  - reflection
+draft: false
+---
+
+This week was the North American RISC-V Summit, which technically isn't directly related to this class, but has many clear connections. As a Clay-Wolkin Fellow and member of Harvey Mudd's VLSI lab, I was at the summit and thought it would be a great topic for this blog post.
+
+While I was only at the conference for two days, there was so much happening! From technical sessions to product launches to a career fair to a demo area with the latest RISC-V boards, there was always something going on. While many of these more formal events were interesting, it was the people at the event that was easily the best part. Getting the chance to have all sorts of different  conversations (technical and not) with many of the biggest names in the world of RISC-V was amazing, and meeting many of the people that I've worked with via GitHub or Zoom in person was great. It truly was a one of a kind experience being surrounded by so many people that were all so knowledgeable about the field.
+
+While I had many of these impromptu conversations, some of the most interesting were the meetings we had scheduled in advance with various groups. By far the most notable of these was during dinner Tuesday night. A group of 16 of us (including the entire team from Mudd, a group from Cambridge, some of the Sail developers, some of the Architectural Compatibility Test developers, someone from the OpenHWGroup, and several others) met to discuss verification, certification, and compatibility testing. This is a big topic at RISC-V International right now and there is a lot of work being put in to figuring out what the future of this will look like. Being a part of this discussion that has the potential to influence a large number of individuals and companies as a sophomore is not something that I would have thought possible, but really was an incredible experience. While some it was, unsurprisingly, over my head, I was still able to make tangible contributions to many parts of the conversation and I am looking forward to seeing where it goes from here.
