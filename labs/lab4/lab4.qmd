@@ -1,3 +1,60 @@
 ---
 title: "Lab 4: Digital Audio"
 ---
+
+
+
+## Introduction
+
+In this lab, an ARM microcontroller was used to drive a speaker to play different songs. The goal was to gain familiarity with the memory-mapped IO and timers that are present on the MCU. The program plays the provided song, Fur Elise, along with an additional song of my choice, Twinkle Twinkle Little Star.
+
+## Design Methodology
+
+I used a series of different libraries from the examples for this course with several modifications specific to this lab. I used the GPIO and RCC libraries nearly unchanged, but heavily modified the timer library to make it easier to work with for this lab. See the source code below for full details, but I set up two timer, one in a normal count-up mode and one in its special PWM mode. I used the one in PWM mode to get the desired output frequency, making sure to keep the duty cycle at 50% to not throw off the sound. Both timers needed careful thought regarding the appropriate values to set for their different registers to ensure they were able to play all of the desired frequencies and hold for all the necessary durations.
+
+For the second song that I played, I chose Twinkle Twinkle Little Star ([sheet music here](https://musescore.com/user/29786779/scores/5246287)) because I knew that it had a small range of notes that would be able to fit into the system that I had designed. Instead of converting each note to its respective frequency, I used the note names in the array and set up additional `#define` macros to replace those notes with the appropriate frequency. This made the process of creating the array for the song far easier than it otherwise would have been.
+
+## Technical Documentation:
+
+The source code for the project can be found in the associated [GitHub repository](https://github.com/jordancarlin/e155-lab4).
+
+### Schematic
+::: {#fig-schematic}
+![](images/schematic.png)
+
+Schematic of the physical circuit.
+:::
+
+@fig-schematic shows the physical layout of the design.
+
+The [LM386](https://www.ti.com/lit/ds/symlink/lm386.pdf#page265) was used to drive the speaker because the GPIO pins of the MCU are not able to provide sufficient current themselves.
+
+### Timer Calculations
+
+I used a 40 MHz system clock by configuring the PLL. This specific frequency was not all that important, but it needed to be high enough to achieve the desired output frequencies without being too high and preventing the other timer from reaching the necessary durations. 40 MHz seemed like a good balance.
+
+For the PWM timer driving the speaker, I chose a prescale value that brought the frequency down to 100 kHz. This made the calculations for the other registers very simple. The `ARR` field controls the PWM frequency. By setting it to 100 kHz divided by the desired frequency, we get the necessary divisor. This then needs to be cut in half since it is a PWM wave that will be run at 50 % duty cycle. The register controlling the duty cycle (`CCR2`) gets half of this calculated frequency to ensure it remains at 50 %. These values are updated every time the note changes. This gives a maximum frequency of 50 kHz (if no additional dividing is done by `ARR`) and a minimum frequency of 100 kHz divided by 2^16, which is 1.526 Hz. This more then covers our range of 220 Hz to 1 kHz.
+
+The divider that controls the frequency can be up to 1 off from the correct value because of integer rounding when doing division. This results in a potential frequency error of one clock cycle. The clock is running at 100 kHz, so one clock cycle is 1 ms. For the frequencies of interest, this results in the following errors:
+
+| Frequency | Ideal Period | Potential Error Period |
+|:----:|:----:|:----:|
+| 220 Hz | 454.545 ms | 454/455 ms |
+| 1000 Hz | 100 ms | 99/101 ms |
+
+These are both within the required 1% of the desired frequency.
+
+For the timer that is counting duration, I used the prescaler to 1 kHz. The slower clock allows us to count to higher values, and we never this counter to be going very fast. This means that the minimum time we can set for a delay will be 1 ms and the maximum will be 65,536 ms. This is determined by dividing the minimum and maximum values (1 and 2^16) by the prescale frequency, 1 kHz.
+
+
+## Results and Discussion
+
+To test my frequencies, I used the tuning app "Tuner T1" and found that they were all correct to within a couple of hertz, which is well within the 5% tolerance for the frequency. Mathematical calculations supporting this same conclusion are provided in the next section.
+
+{{< video https://youtu.be/C0ykOMBJGA4 >}}
+
+## Conclusion
+
+The design successfully plays two songs in series on a speaker. It uses a potentiometer to control the volume and all of the pitches and frequencies are correct.
+
+I spent a total of 17 hours working on this lab.
