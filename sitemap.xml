@@ -2,82 +2,86 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jordancarlin.github.io/hmc-e155-portfolio/blog.html</loc>
-    <lastmod>2024-10-29T22:00:35.141Z</lastmod>
+    <lastmod>2024-11-02T06:56:57.731Z</lastmod>
   </url>
   <url>
     <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-1-blog.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
   </url>
   <url>
     <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-7-blog.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-2-blog.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-6-blog.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/index.html</loc>
-    <lastmod>2024-10-29T22:00:35.145Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab7/lab7.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab2/lab2.html</loc>
-    <lastmod>2024-10-29T22:00:35.153Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab5/lab5.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab4/lab4.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs.html</loc>
-    <lastmod>2024-10-29T22:00:35.145Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab1/lab1.html</loc>
-    <lastmod>2024-10-29T22:00:35.149Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab3/lab3.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab6/lab6.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/resources.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-3-blog.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-8-blog.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
   </url>
   <url>
     <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-5-blog.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-8-blog.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-3-blog.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/resources.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab6/lab6.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab3/lab3.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab1/lab1.html</loc>
+    <lastmod>2024-11-02T06:56:57.743Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs.html</loc>
+    <lastmod>2024-11-02T06:56:57.735Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab4/lab4.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab5/lab5.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab2/lab2.html</loc>
+    <lastmod>2024-11-02T06:56:57.747Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/labs/lab7/lab7.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/index.html</loc>
+    <lastmod>2024-11-02T06:56:57.735Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-6-blog.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-2-blog.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-9-blog.html</loc>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
   </url>
   <url>
     <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/learning-goals.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
   </url>
   <url>
     <loc>https://jordancarlin.github.io/hmc-e155-portfolio/posts/week-4-blog.html</loc>
-    <lastmod>2024-10-29T22:00:35.161Z</lastmod>
+    <lastmod>2024-11-02T06:56:57.755Z</lastmod>
   </url>
 </urlset>
