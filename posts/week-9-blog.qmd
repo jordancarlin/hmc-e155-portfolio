@@ -1,0 +1,15 @@
+---
+title: "MicroPs Week 9 Reflections"
+description: "Project Thoughts and Nearing the End of Labs"
+author: "Jordan Carlin"
+date: "11/1/24"
+categories:
+  - reflection
+draft: false
+---
+
+The semester really has flown by. I'm working on finishing up all of the remaining labs in the next few days. I need to do most of labs 6 and 7 and finish up lab 5 by the end of the week. While that's certainly a lot of work to do on the labs, I want to shift my focus to the final project for this blog post. As I introduced in my [post a few weeks ago](./week-6-blog.qmd), Zoe and I are working on a cross between etch-a-sketch and the python turtle graphics program. The user will have a joystick to control what they are drawing and buttons/sliders to control the color, brush width, and whether or not the pen is down. With the design review presentations coming up next week, I want to take this space to talk about one of the main questions we're still trying to figure out that we're hoping to get advice on from our peers.
+
+One of the big challenges with displaying graphics is the sheer amount of data needed to represent everything. Constantly transmitting all of this information between the MCU and FPGA would be wildly inefficient and slow, so we plan to use the FPGA's onboard memory banks as the main storage location for all of this. This keeps the data close to the display driver that actually needs all of this data. While this is great, it also poses a new dilemma: how the MCU and FPGA should communicate. The MCU will be getting the inputs from the user, so it needs to transmit what needs to change to the FPGA. We're planning to do this using the SPI protocol, but exactly what data should be transmitted and how to encode it is still up in the air.
+
+There are some parts that are fairly clear. We will definitely need to pass the color that is being drawn as part of the data packet and it will likely be encoded in a 3 bit binary representation to cover the 7 options that the user has. The data for the timer will probably be transmitted as a separate data packet distinct from the main drawing one that is sent once a second. The rest of the data in the drawing packet is where it gets tricky though. Most likely the MCU will need to keep track of the current location of the brush. It will then need to transmit which pixels need to change color. This could potentially be done by passing 2 corners of a rectangle that it calculates based on the current location and brush width. Alternatively, it could transmit just the location and brush width and the FPGA could then determine which pixels that means need to change. If we wanted to push even more onto the FPGA it could even just transmit which direction the brush is moving and all of the state about current location could be kept on the FPGA. This would require it to calculate the new position instead of the MCU. Balancing the computation being done on the MCU and FPGA with the amount of data that needs to be transmitted is going to be an interesting challenge and we're looking forward to seeing if any of the other students in MicroPs have good suggestions for this.
