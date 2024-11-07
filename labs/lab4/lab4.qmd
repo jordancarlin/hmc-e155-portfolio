@@ -51,7 +51,7 @@ For the timer that is counting duration, I used the prescaler to 1 kHz. The slow
 
 To test my frequencies, I used the tuning app "Tuner T1" and found that they were all correct to within a couple of hertz, which is well within the 5% tolerance for the frequency. Mathematical calculations supporting this same conclusion are provided in the next section.
 
-{{< video https://youtu.be/C0ykOMBJGA4 >}}
+{{< video https://youtu.be/-G2M67megS0 >}}
 
 ## Conclusion
 
