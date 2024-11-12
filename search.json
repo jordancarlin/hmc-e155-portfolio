@@ -252,6 +252,48 @@
     "text": "Conclusion\nThe design successfully displays two digits on the 7-segment display based on the characters that are input using the keypad. The numbers persist after the keys are released and cycle off to the left as new keys are pressed.\nI spent a total of 27 hours working on this lab."
   },
   {
+    "objectID": "labs/lab6/lab6.html",
+    "href": "labs/lab6/lab6.html",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "",
+    "text": "In this lab, an ARM microcontroller was used to control an SPI based temperature sensor. The data from this MCU was then supposed to be sent via UART to an ESP that hosted a webserver. The temperature could be viewed on the website and the precision of the sensor could be changed as well. Unfortunately, the ESPs are very finicky and mine was unable to successfully communicate with the MCU despite many attempts with several boards. I will touch on the ESP throughout the report, but the focus will be on the SPI temperature sensor since that is what I actually got working."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#introduction",
+    "href": "labs/lab6/lab6.html#introduction",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "",
+    "text": "In this lab, an ARM microcontroller was used to control an SPI based temperature sensor. The data from this MCU was then supposed to be sent via UART to an ESP that hosted a webserver. The temperature could be viewed on the website and the precision of the sensor could be changed as well. Unfortunately, the ESPs are very finicky and mine was unable to successfully communicate with the MCU despite many attempts with several boards. I will touch on the ESP throughout the report, but the focus will be on the SPI temperature sensor since that is what I actually got working."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#design-methodology",
+    "href": "labs/lab6/lab6.html#design-methodology",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Design Methodology",
+    "text": "Design Methodology\nI used a series of different libraries from the examples for this course with several modifications specific to this lab. The bulk of the design work for this lab was creating an SPI library for the MCU. I used the template that was discussed in class to set up a library that defined two functions, an init function and a transmit/receive function. These were built using the CMSIS headers, which made the process much more straightforward. The initialization function sets clocks, pin modes, and various registers to configure baud rate and polarity.\nI also created a library for the temperature sensor to make reuse easy. This library has a function to set the precision of the sensor and another to get the current temperature. These are built on top of the SPI library that I already built. They send the necessary SPI packets to read/write to the necessary registers and ensure that the chip enable signal is high at the appropriate times.\nAn earlier version of my code for this project also included UART packets being sent from the MCU to the ESP to create the webpage and requests being sent back to the MCU from the ESP along that same UART protocol. These controlled the precision setting for the sensor, but since the ESP has been removed from my system I am just using a hardcoded value that gets passed to the function and can be changed at compile time."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#technical-documentation",
+    "href": "labs/lab6/lab6.html#technical-documentation",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Technical Documentation:",
+    "text": "Technical Documentation:\nThe source code for the project can be found in the associated GitHub repository.\n\nSchematic\n\n\n\n\n\n\nFigure 1: Schematic of the physical circuit.\n\n\n\nFigure 1 shows the physical layout of the design.\nThe DS1722 temperature sensor was used in SPI mode.\n\n\nSPI Trace\n\n\n\n\n\n\nFigure 2: SPI trace of communication between temperature sensor and MCU during a temperature read.\n\n\n\nFigure 2 shows the communication between the temperature sensor and the MCU during a temperature read."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#results-and-discussion",
+    "href": "labs/lab6/lab6.html#results-and-discussion",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nTo test the temperature sensor, I checked the temperature at room temperature and compared it to what the AC in the lab said. The AC said 22 °C and the sensor reported 21.75 °C. This seems to be within a reasonable margin of error. I also tested warming the sensor up by pressing my finger on it and cooling it down with compressed air. In both cases the sensor responded accordingly. It was also capable of hitting compressed temperatures when using the compressed air."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#conclusion",
+    "href": "labs/lab6/lab6.html#conclusion",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Conclusion",
+    "text": "Conclusion\nThe design successfully communicates with an SPI temperature sensor, sets its precision, and reports the current temperature. Due to issues with the ESP, this temperature is printed via the debug interface instead of being sent to a webserver.\nI spent a total of 17 hours working on this lab."
+  },
+  {
     "objectID": "resources.html",
     "href": "resources.html",
     "title": "Resources",

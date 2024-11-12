@@ -115,8 +115,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#design-methodology" id="toc-design-methodology" class="nav-link" data-scroll-target="#design-methodology">Design Methodology</a></li>
+  <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation:</a>
+  <ul class="collapse">
+  <li><a href="#schematic" id="toc-schematic" class="nav-link" data-scroll-target="#schematic">Schematic</a></li>
+  <li><a href="#spi-trace" id="toc-spi-trace" class="nav-link" data-scroll-target="#spi-trace">SPI Trace</a></li>
+  </ul></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -140,8 +154,60 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this lab, an ARM microcontroller was used to control an SPI based temperature sensor. The data from this MCU was then supposed to be sent via UART to an ESP that hosted a webserver. The temperature could be viewed on the website and the precision of the sensor could be changed as well. Unfortunately, the ESPs are very finicky and mine was unable to successfully communicate with the MCU despite many attempts with several boards. I will touch on the ESP throughout the report, but the focus will be on the SPI temperature sensor since that is what I actually got working.</p>
+</section>
+<section id="design-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="design-methodology">Design Methodology</h2>
+<p>I used a series of different libraries from the examples for this course with several modifications specific to this lab. The bulk of the design work for this lab was creating an SPI library for the MCU. I used the template that was discussed in class to set up a library that defined two functions, an init function and a transmit/receive function. These were built using the CMSIS headers, which made the process much more straightforward. The initialization function sets clocks, pin modes, and various registers to configure baud rate and polarity.</p>
+<p>I also created a library for the temperature sensor to make reuse easy. This library has a function to set the precision of the sensor and another to get the current temperature. These are built on top of the SPI library that I already built. They send the necessary SPI packets to read/write to the necessary registers and ensure that the chip enable signal is high at the appropriate times.</p>
+<p>An earlier version of my code for this project also included UART packets being sent from the MCU to the ESP to create the webpage and requests being sent back to the MCU from the ESP along that same UART protocol. These controlled the precision setting for the sensor, but since the ESP has been removed from my system I am just using a hardcoded value that gets passed to the function and can be changed at compile time.</p>
+</section>
+<section id="technical-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation:</h2>
+<p>The source code for the project can be found in the associated <a href="https://github.com/jordancarlin/e155-lab6">GitHub repository</a>.</p>
+<section id="schematic" class="level3">
+<h3 class="anchored" data-anchor-id="schematic">Schematic</h3>
+<div id="fig-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/schematic.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Schematic of the physical circuit.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-schematic" class="quarto-xref">Figure&nbsp;1</a> shows the physical layout of the design.</p>
+<p>The <a href="https://hmc-e155.github.io/assets/doc/ds1722.pdf">DS1722</a> temperature sensor was used in SPI mode.</p>
+</section>
+<section id="spi-trace" class="level3">
+<h3 class="anchored" data-anchor-id="spi-trace">SPI Trace</h3>
+<div id="fig-trace" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/trace.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: SPI trace of communication between temperature sensor and MCU during a temperature read.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-trace" class="quarto-xref">Figure&nbsp;2</a> shows the communication between the temperature sensor and the MCU during a temperature read.</p>
+</section>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
+<p>To test the temperature sensor, I checked the temperature at room temperature and compared it to what the AC in the lab said. The AC said 22 °C and the sensor reported 21.75 °C. This seems to be within a reasonable margin of error. I also tested warming the sensor up by pressing my finger on it and cooling it down with compressed air. In both cases the sensor responded accordingly. It was also capable of hitting compressed temperatures when using the compressed air.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The design successfully communicates with an SPI temperature sensor, sets its precision, and reports the current temperature. Due to issues with the ESP, this temperature is printed via the debug interface instead of being sent to a webserver.</p>
+<p>I spent a total of 17 hours working on this lab.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
