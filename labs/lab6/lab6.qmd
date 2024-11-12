@@ -1,3 +1,49 @@
 ---
 title: "Lab 6: The Internet of Things and Serial Peripheral Interface"
 ---
+
+## Introduction
+
+In this lab, an ARM microcontroller was used to control an SPI based temperature sensor. The data from this MCU was then supposed to be sent via UART to an ESP that hosted a webserver. The temperature could be viewed on the website and the precision of the sensor could be changed as well. Unfortunately, the ESPs are very finicky and mine was unable to successfully communicate with the MCU despite many attempts with several boards. I will touch on the ESP throughout the report, but the focus will be on the SPI temperature sensor since that is what I actually got working.
+
+## Design Methodology
+
+I used a series of different libraries from the examples for this course with several modifications specific to this lab. The bulk of the design work for this lab was creating an SPI library for the MCU. I used the template that was discussed in class to set up a library that defined two functions, an init function and a transmit/receive function. These were built using the CMSIS headers, which made the process much more straightforward. The initialization function sets clocks, pin modes, and various registers to configure baud rate and polarity.
+
+I also created a library for the temperature sensor to make reuse easy. This library has a function to set the precision of the sensor and another to get the current temperature. These are built on top of the SPI library that I already built. They send the necessary SPI packets to read/write to the necessary registers and ensure that the chip enable signal is high at the appropriate times.
+
+An earlier version of my code for this project also included UART packets being sent from the MCU to the ESP to create the webpage and requests being sent back to the MCU from the ESP along that same UART protocol. These controlled the precision setting for the sensor, but since the ESP has been removed from my system I am just using a hardcoded value that gets passed to the function and can be changed at compile time.
+
+## Technical Documentation:
+
+The source code for the project can be found in the associated [GitHub repository](https://github.com/jordancarlin/e155-lab6).
+
+### Schematic
+::: {#fig-schematic}
+![](images/schematic.png)
+
+Schematic of the physical circuit.
+:::
+
+@fig-schematic shows the physical layout of the design.
+
+The [DS1722](https://hmc-e155.github.io/assets/doc/ds1722.pdf) temperature sensor was used in SPI mode.
+
+### SPI Trace
+::: {#fig-trace}
+![](images/trace.png)
+
+SPI trace of communication between temperature sensor and MCU during a temperature read.
+:::
+
+@fig-trace shows the communication between the temperature sensor and the MCU during a temperature read.
+
+## Results and Discussion
+
+To test the temperature sensor, I checked the temperature at room temperature and compared it to what the AC in the lab said. The AC said 22 °C and the sensor reported 21.75 °C. This seems to be within a reasonable margin of error. I also tested warming the sensor up by pressing my finger on it and cooling it down with compressed air. In both cases the sensor responded accordingly. It was also capable of hitting compressed temperatures when using the compressed air.
+
+## Conclusion
+
+The design successfully communicates with an SPI temperature sensor, sets its precision, and reports the current temperature. Due to issues with the ESP, this temperature is printed via the debug interface instead of being sent to a webserver.
+
+I spent a total of 17 hours working on this lab.
