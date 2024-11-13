@@ -91,6 +91,48 @@
     "text": "Conclusion\nThe design successfully displays two digits on the 7-segment display at the same time with only one set of pins by utilizing time-multiplexing. The LEDs show the correct sum for all input digits.\nI spent a total of 13 hours working on this lab."
   },
   {
+    "objectID": "labs/lab5/lab5.html",
+    "href": "labs/lab5/lab5.html",
+    "title": "Lab 5: Interrupts",
+    "section": "",
+    "text": "In this lab, an ARM microcontroller was used to measure the rotational speed and direction of a motor using a quadrature encoder. Pulses from this encoder were detected using interrupts to achieve a high degree of accuracy and precision."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#introduction",
+    "href": "labs/lab5/lab5.html#introduction",
+    "title": "Lab 5: Interrupts",
+    "section": "",
+    "text": "In this lab, an ARM microcontroller was used to measure the rotational speed and direction of a motor using a quadrature encoder. Pulses from this encoder were detected using interrupts to achieve a high degree of accuracy and precision."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#design-methodology",
+    "href": "labs/lab5/lab5.html#design-methodology",
+    "title": "Lab 5: Interrupts",
+    "section": "Design Methodology",
+    "text": "Design Methodology\nI used a series of different libraries from the examples for this course as the starting point for my design. I used the GPIO, RCC, and TIM libraries nearly unchanged. On top of these libraries, I implemented control of several of the EXTI interrupts controllers. The main design challenge for this lab was deciding how many interrupts to have and figuring out how to determine both speed and direction from these interrupts.\nI ended up settling on using one interrupt handler that gets called when there is an interrupt on either of the two encoder channels. This interrupt handler increases a variable counting the number of pulses each time it is called and updates an array with the status of the encoder (which channel was triggered and if it was rising or falling). The new state is compared to the state that was stored on the previous interrupt. Quadrature encoders are 90° out of phase, so the transition pattern is unique depending on which direction the motor is spinning. A checkDirection function compares which transition took place to a list of conditions to determine which direction the motor must be spinning. Using a timer, the number of pulses is checked after each second. This number of pulses is divided by 480 (the number of pulses per rotation * 2 channels counting pulses * counting twice because using the rising and falling edge) and output as the current speed in revolutions/sec. The variable tracking the number of pulses is then cleared to being counting for the next second.\nThis approach gains all of the benefits of using interrupts over timers (see below) without needing to strike a careful balance of different timers and frequencies. A single timer is used just to check the number of pulses each second, so it was initialized to run at a 1 ms clock rate and a simple delay_millis function could be used."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#technical-documentation",
+    "href": "labs/lab5/lab5.html#technical-documentation",
+    "title": "Lab 5: Interrupts",
+    "section": "Technical Documentation:",
+    "text": "Technical Documentation:\nThe source code for the project can be found in the associated GitHub repository.\n\nSchematic\n\n\n\n\n\n\nFigure 1: Schematic of the physical circuit.\n\n\n\nFigure 1 shows the physical layout of the design.\nA 25GA-370 DC Motor was used as the motor/encoder for this lab.\n\n\nFlowchart\n\n\n\n\n\n\nFigure 2: Flowchart of the program logic and control flow. This shows how interrupts are handled and interface with the main loop.\n\n\n\nFigure 2 shows control flow of the program. The main loop is executing on the left and the interrupt handler that is triggered whenever an encoder channel pulses is on the right."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#results-and-discussion",
+    "href": "labs/lab5/lab5.html#results-and-discussion",
+    "title": "Lab 5: Interrupts",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nTo test my motor I connected it to a power supply and varied the voltage while it was connected to my circuit. First I ran it at very low speeds in both directions to visually check that the reported direction was correct (it was). I also connected the encoder channels to an oscilloscope to check how many pulses the encoder was generating using a second method.\n\n\n\n\n\n\nFigure 3\n\n\n\nFrom Figure 3, the encoder pulsed 7 of times in 9 ms. There are 120 pulses per rotation, so the number of rotations is just the number of pulses from one channel divided by two. Scaling this up to a full second, this gives a speed of 6.48 rotations/sec. The MCU reported 6.325 rotations/sec as the speed at the same time. These speeds are close enough together that it seems like the MCU is accurate. If anything, I suspect that the MCU might be more accurate in this case because it is able to get more precise timings then I am from the oscilloscope. I repeated this test at speeds of 3.2 rotations/sec and 8.9 rotations/sec and had similar results.\n\nInterrupts vs Polling\nThe main focus of this lab was to learn about the use of interrupts and the benefits they provide over polling. Another possible approach to determine the speed of the motor could have skipped over interrupts and just used the GPIO pins as standard inputs. A timer could then be used to check the state of the inputs at some predetermined interval. If it is different than the previous state then it means a pulse had occurred. While this could have reasonable accuracy with a high polling rate and a low motor speed, it quickly falls apart if the motor is spinning fast enough for the MCU to miss pulses. If the encoder pulses high and back low in the time between a check, the pulse will be missed entirely. This will result in a lower speed than is appropriate for the motor. Interrupts avoid this problem because as soon as the state of the GPIO pin changes, the MCU stops its main thread and jumps to the code to check the state of the interrupt. This guarantees a rapid response to encoder pulses, significantly decreasing the changes of missing one."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#conclusion",
+    "href": "labs/lab5/lab5.html#conclusion",
+    "title": "Lab 5: Interrupts",
+    "section": "Conclusion",
+    "text": "Conclusion\nThe design successfully reports the speed of a motor and its direction, updating every second. I spent a total of 9 hours on this lab."
+  },
+  {
     "objectID": "labs/lab4/lab4.html",
     "href": "labs/lab4/lab4.html",
     "title": "Lab 4: Digital Audio",

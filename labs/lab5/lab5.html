@@ -115,8 +115,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#design-methodology" id="toc-design-methodology" class="nav-link" data-scroll-target="#design-methodology">Design Methodology</a></li>
+  <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation:</a>
+  <ul class="collapse">
+  <li><a href="#schematic" id="toc-schematic" class="nav-link" data-scroll-target="#schematic">Schematic</a></li>
+  <li><a href="#flowchart" id="toc-flowchart" class="nav-link" data-scroll-target="#flowchart">Flowchart</a></li>
+  </ul></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a>
+  <ul class="collapse">
+  <li><a href="#interrupts-vs-polling" id="toc-interrupts-vs-polling" class="nav-link" data-scroll-target="#interrupts-vs-polling">Interrupts vs Polling</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -140,8 +157,74 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this lab, an ARM microcontroller was used to measure the rotational speed and direction of a motor using a quadrature encoder. Pulses from this encoder were detected using interrupts to achieve a high degree of accuracy and precision.</p>
+</section>
+<section id="design-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="design-methodology">Design Methodology</h2>
+<p>I used a series of different libraries from the examples for this course as the starting point for my design. I used the GPIO, RCC, and TIM libraries nearly unchanged. On top of these libraries, I implemented control of several of the EXTI interrupts controllers. The main design challenge for this lab was deciding how many interrupts to have and figuring out how to determine both speed and direction from these interrupts.</p>
+<p>I ended up settling on using one interrupt handler that gets called when there is an interrupt on either of the two encoder channels. This interrupt handler increases a variable counting the number of pulses each time it is called and updates an array with the status of the encoder (which channel was triggered and if it was rising or falling). The new state is compared to the state that was stored on the previous interrupt. Quadrature encoders are 90° out of phase, so the transition pattern is unique depending on which direction the motor is spinning. A <code>checkDirection</code> function compares which transition took place to a list of conditions to determine which direction the motor must be spinning. Using a timer, the number of pulses is checked after each second. This number of pulses is divided by 480 (the number of pulses per rotation * 2 channels counting pulses * counting twice because using the rising and falling edge) and output as the current speed in revolutions/sec.&nbsp;The variable tracking the number of pulses is then cleared to being counting for the next second.</p>
+<p>This approach gains all of the benefits of using interrupts over timers (see below) without needing to strike a careful balance of different timers and frequencies. A single timer is used just to check the number of pulses each second, so it was initialized to run at a 1 ms clock rate and a simple <code>delay_millis</code> function could be used.</p>
+</section>
+<section id="technical-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation:</h2>
+<p>The source code for the project can be found in the associated <a href="https://github.com/jordancarlin/e155-lab5">GitHub repository</a>.</p>
+<section id="schematic" class="level3">
+<h3 class="anchored" data-anchor-id="schematic">Schematic</h3>
+<div id="fig-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/schematic.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Schematic of the physical circuit.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-schematic" class="quarto-xref">Figure&nbsp;1</a> shows the physical layout of the design.</p>
+<p>A <a href="https://hmc-e155.github.io/assets/lab/25GA370.pdf">25GA-370 DC Motor</a> was used as the motor/encoder for this lab.</p>
+</section>
+<section id="flowchart" class="level3">
+<h3 class="anchored" data-anchor-id="flowchart">Flowchart</h3>
+<div id="fig-flowchart" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/flowchart.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Flowchart of the program logic and control flow. This shows how interrupts are handled and interface with the main loop.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-flowchart" class="quarto-xref">Figure&nbsp;2</a> shows control flow of the program. The main loop is executing on the left and the interrupt handler that is triggered whenever an encoder channel pulses is on the right.</p>
+</section>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
+<p>To test my motor I connected it to a power supply and varied the voltage while it was connected to my circuit. First I ran it at very low speeds in both directions to visually check that the reported direction was correct (it was). I also connected the encoder channels to an oscilloscope to check how many pulses the encoder was generating using a second method.</p>
+<div id="fig-trace" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/trace.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3
+</figcaption>
+</figure>
+</div>
+<p>From <a href="#fig-trace" class="quarto-xref">Figure&nbsp;3</a>, the encoder pulsed 7 of times in 9 ms. There are 120 pulses per rotation, so the number of rotations is just the number of pulses from one channel divided by two. Scaling this up to a full second, this gives a speed of 6.48 rotations/sec.&nbsp;The MCU reported 6.325 rotations/sec as the speed at the same time. These speeds are close enough together that it seems like the MCU is accurate. If anything, I suspect that the MCU might be more accurate in this case because it is able to get more precise timings then I am from the oscilloscope. I repeated this test at speeds of 3.2 rotations/sec and 8.9 rotations/sec and had similar results.</p>
+<section id="interrupts-vs-polling" class="level3">
+<h3 class="anchored" data-anchor-id="interrupts-vs-polling">Interrupts vs Polling</h3>
+<p>The main focus of this lab was to learn about the use of interrupts and the benefits they provide over polling. Another possible approach to determine the speed of the motor could have skipped over interrupts and just used the GPIO pins as standard inputs. A timer could then be used to check the state of the inputs at some predetermined interval. If it is different than the previous state then it means a pulse had occurred. While this could have reasonable accuracy with a high polling rate and a low motor speed, it quickly falls apart if the motor is spinning fast enough for the MCU to miss pulses. If the encoder pulses high and back low in the time between a check, the pulse will be missed entirely. This will result in a lower speed than is appropriate for the motor. Interrupts avoid this problem because as soon as the state of the GPIO pin changes, the MCU stops its main thread and jumps to the code to check the state of the interrupt. This guarantees a rapid response to encoder pulses, significantly decreasing the changes of missing one.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The design successfully reports the speed of a motor and its direction, updating every second. I spent a total of 9 hours on this lab.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
