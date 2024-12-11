@@ -1,0 +1,15 @@
+---
+title: "MicroPs Week 12 Reflections"
+description: "The End?"
+author: "Jordan Carlin"
+date: "12/10/24"
+categories:
+  - reflection
+draft: false
+---
+
+Just like that, the semester has comoe to a close. That last week really was a flurry of nonstop craziness as we strove to get the finishing touches of our project put together. While we had high hopes for **MicroP(ictionary)** and I'm very proud of what we accomplished, I can't help but feel disappointed that we stumbled so close to the end. We had the communication between the MCU and FPGA working flawlessly and the VGA output was coming along nicely as well. And then, of all the things that could go wrong, we had a hardware failure. Somehow or another we shorted something and neither our dev board nor any of the inputs to our MCU worked anymore. While we were able to get the dev board working again, the inputs never recovered and we had to show off all of our hard work without its key feature: interactivity. While the project didn't go how we wanted, we were still able to salvage something pretty interesting: a "*glorified screensaver*". We had the MCU send random colors and positions to the FPGA so it drew interesting and unique patters. For more details on how our final project went (both the original version and this modified approach), see [https://jordancarlin.github.io/e155-project/](https://jordancarlin.github.io/e155-project/).
+
+While things may not have gone the way we wanted, I still learned so much throughout both the final project and the class as a whole. From technical skills like designing real world systems using Verilog on an FPGA or C on an MCU to more professional/personal skills like perseverance and teamwork in difficult/stressful situations, this class really has covered so much ground and helped me to grow as a student, a digital designer, and a person. I'll definitely be taking many of these lessons with me and who knows, maybe one day I'll return to this project and get **MicroP(ictionary)** working once and for all.
+
+Well, it's been quite the journey. This will be my final blog post on this site, but the journey that is encapsulated here is one that will undoubtedly stay with me. I'm so thankful to all of the people who've been part of my journey throughout this class, and especially to Zoe Worrall,my partner on the final project, and Prof. Brake, who taught us all so much and guided us through this journey.
